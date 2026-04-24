@@ -37,7 +37,7 @@ const Navbar = () => {
         <div className="container flex items-center justify-between" style={{ height: '72px' }}>
           {/* Logo */}
           <a href="#home" className="font-display font-bold text-[18px] tracking-[-0.02em] uppercase">
-            NEXORA DEV
+            DEV
           </a>
 
           {/* Desktop Links */}

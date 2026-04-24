@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import CustomCursor from './components/CustomCursor';
+import Loader from './components/Loader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Marquee from './components/Marquee';
@@ -12,12 +14,15 @@ import Footer from './components/Footer';
 import './index.css';
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <>
       <CustomCursor />
+      {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
       <Navbar />
       <main>
-        <Hero />
+        <Hero isReady={!isLoading} />
         <Marquee />
         <About />
         <Capabilities />

@@ -668,3 +668,14 @@ img {
     height: 32px;
   }
 }
+
+/* ── Loader Progress ────────────────────────────── */
+
+.loader-progress-bar {
+  animation: loader-progress 3.5s var(--ease-in-out) forwards;
+}
+
+@keyframes loader-progress {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}

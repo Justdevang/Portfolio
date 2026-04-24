@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Hero = () => {
+const Hero = ({ isReady }) => {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const infoRef = useRef(null);
@@ -15,7 +15,12 @@ const Hero = () => {
   const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
+    if (!isReady) return;
+
     const ctx = gsap.context(() => {
+      // Refresh ScrollTrigger to ensure positions are correct after loader exit
+      ScrollTrigger.refresh();
+
       // Stagger headline words
       const words = headingRef.current?.querySelectorAll('.hero-word');
       gsap.fromTo(
@@ -28,7 +33,7 @@ const Hero = () => {
           duration: 1.2,
           stagger: 0.1,
           ease: 'power4.out',
-          delay: 0.3,
+          delay: 0.5, // Small extra delay for smoother entry
         }
       );
 
@@ -36,14 +41,14 @@ const Hero = () => {
       gsap.fromTo(
         infoRef.current,
         { opacity: 0, x: 30 },
-        { opacity: 1, x: 0, duration: 1, ease: 'power3.out', delay: 1.2 }
+        { opacity: 1, x: 0, duration: 1, ease: 'power3.out', delay: 1.4 }
       );
 
       // Scroll indicator
       gsap.fromTo(
         scrollRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.8, delay: 2 }
+        { opacity: 1, duration: 0.8, delay: 2.2 }
       );
 
       // Fade out scroll indicator on scroll
@@ -58,12 +63,9 @@ const Hero = () => {
       });
 
       // ─── Showreel: clip-path reveal ───
-      // The reel section starts with the video clipped to a small rounded rect
-      // in the center, then as you scroll it reveals to full width
       const mm = gsap.matchMedia();
 
       mm.add('(min-width: 768px)', () => {
-        // Animate from small centered clip to full
         gsap.fromTo(
           reelContainerRef.current,
           {
@@ -103,7 +105,7 @@ const Hero = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isReady]);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -141,7 +143,7 @@ const Hero = () => {
               <span key={i} className="block overflow-hidden">
                 <span
                   className={`hero-word inline-block ${line.italic ? 'hero-italic' : ''}`}
-                  style={{ display: 'inline-block' }}
+                  style={{ display: 'inline-block', opacity: 0 }}
                 >
                   {line.text}
                 </span>

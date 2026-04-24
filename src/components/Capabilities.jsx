@@ -8,29 +8,28 @@ const capabilities = [
   {
     number: '01',
     title: 'Frontend Development',
-    description:
-      'HTML, CSS, JavaScript, React — building fast, responsive interfaces that feel as good as they look. Performance-first, always.',
+    description: 'I build fast, responsive, and visually engaging user interfaces using HTML, CSS, JavaScript, React, and modern frameworks. Every interface is optimized for performance, usability, and seamless interaction across all devices.',
     image: '/images/capability-frontend.png',
   },
   {
     number: '02',
     title: 'Web Design',
     description:
-      'Figma, Framer, layouts that guide users effortlessly. Every pixel placed with purpose, every interaction considered.',
+      'I design clean, modern, and conversion-focused websites using tools like Figma and Framer, ensuring a smooth user experience and visually appealing layouts that turn visitors into customers.',
     image: '/images/capability-webdesign.png',
   },
   {
     number: '03',
-    title: 'Framer & No-Code',
+    title: 'Web Apps',
     description:
-      'Rapid builds in Framer, Webflow — pixel-perfect, no waiting. When speed matters without sacrificing quality.',
+      'I develop custom web applications using React, Node.js, APIs, and databases, building scalable dashboards, tools, and systems that streamline workflows and support business growth.',
     image: '/images/capability-nocode.png',
   },
   {
     number: '04',
-    title: 'Branding & Identity',
+    title: 'AI Automations',
     description:
-      'Logo systems, color palettes, design systems for small businesses. Building brands that feel intentional and memorable.',
+      'I create intelligent automation systems using n8n, APIs, webhooks, and AI tools like OpenAI, helping businesses automate repetitive tasks, generate leads, and operate more efficiently.',
     image: '/images/capability-branding.png',
   },
 ];

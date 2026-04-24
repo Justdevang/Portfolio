@@ -14,7 +14,13 @@ const projects = [
   {
     number: '02',
     name: 'Soundabode',
-    tags: ['BRANDING', 'WEB DESIGN'],
+    tags: ['BRANDING', 'WEB DEVELOPMENT'],
+    image: '/project-soundabode.png',
+  },
+  {
+    number: '03',
+    name: 'Avira OS',
+    tags: ['AUTOMATION', 'WEB APP'],
     image: '/project-soundabode.png',
   },
 ];

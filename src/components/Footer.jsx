@@ -11,9 +11,9 @@ const Footer = () => {
   const daysText = days.map((d) => `${d} · `).join('');
 
   const socials = [
-    { label: 'Instagram', href: 'https://instagram.com' },
-    { label: 'LinkedIn', href: 'https://linkedin.com' },
-    { label: 'GitHub', href: 'https://github.com' },
+    { label: 'Instagram', href: 'https://www.instagram.com/_automatewithdev/' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/devang-dhakate/' },
+    { label: 'GitHub', href: 'https://github.com/Justdevang' },
   ];
 
   return (
@@ -44,7 +44,7 @@ const Footer = () => {
       <div className="container relative z-10 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Left */}
         <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">
-          NEXORA DEV © 2026. All Rights Reserved.
+          DEV © 2026. All Rights Reserved.
         </span>
 
         {/* Right — Socials */}
