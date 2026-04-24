@@ -23,7 +23,7 @@ const capabilities = [
     title: 'Web Apps',
     description:
       'I develop custom web applications using React, Node.js, APIs, and databases, building scalable dashboards, tools, and systems that streamline workflows and support business growth.',
-    image: '/images/capability-nocode.png',
+    image: '/images/capabilities-webapp.png',
   },
   {
     number: '04',
