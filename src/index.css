@@ -4,7 +4,33 @@
    NEXORA DEV — Editorial Design System
    ═══════════════════════════════════════════════════ */
 
+/* --- Performance Optimizations --- */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+img, video, canvas {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+nav, header, .sticky, .navbar {
+  transform: translateZ(0);
+  will-change: transform;
+  isolation: isolate;
+}
+
+/* --- Base Styles --- */
 :root {
+...
   /* Colors */
   --bg: #F4F1EC;
   --bg-dark: #0D0D0D;
@@ -245,11 +271,16 @@ img {
   border: 1.5px solid rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s var(--ease);
   cursor: none;
+  /* Performance Fix for blurred elements */
+  transform: translateZ(0);
+  will-change: transform;
+  isolation: isolate;
 }
 
 .reel-play-btn:hover {
