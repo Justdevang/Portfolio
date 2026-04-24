@@ -95,7 +95,7 @@ const SelectedWork = () => {
         {/* Sub-tag */}
         <div className="work-reveal mb-16">
           <span className="font-mono text-[11px] tracking-[0.1em] uppercase text-[var(--text-muted)]">
-            Built by Nexora Dev · ©2025–26
+            Built by Devang Dhakate · ©2025–26
           </span>
         </div>
 

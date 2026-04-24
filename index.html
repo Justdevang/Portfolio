@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/svg+xml" href="/DEVANG.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DEVANG - Web Developer & Designer | Pune, India</title>
   <meta name="description"
     content="I build digital experiences with structure and intention. Web developer and designer based in Pune, India. Specializing in frontend development, web design, and branding." />
-  <meta property="og:title" content="NEXORA DEV — Web Developer & Designer" />
+  <meta property="og:title" content="DEVANG DHAKATE — Web Developer & Designer" />
   <meta property="og:description"
     content="I build digital experiences with structure and intention. Then I make them move." />
   <meta property="og:type" content="website" />
@@ -23,6 +23,25 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
+  <!-- Lenis Smooth Scroll CDN -->
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script>
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    })
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+    
+    // Expose lenis to window so we can use it in React
+    window.lenis = lenis;
+  </script>
 </body>
 
 </html>
