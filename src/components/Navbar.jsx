@@ -1,70 +1,113 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-    return (
-        <nav className="fixed w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/5 transition-all duration-500">
-            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-                <div className="flex items-center justify-between h-16">
-                    <div className="flex-shrink-0">
-                        <a href="#" className="text-xl font-bold text-white tracking-tighter hover:opacity-80 transition-opacity">
-                            Devang<span className="text-[#bef264]">.</span>
-                        </a>
-                    </div>
- 
-                    {/* Desktop Menu */}
-                    <div className="hidden md:block">
-                        <div className="ml-10 flex items-center space-x-8">
-                            {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
-                                <a
-                                    key={item}
-                                    href={`#${item.toLowerCase()}`}
-                                    className="text-gray-400 hover:text-[#bef264] transition-all duration-300 text-xs font-bold tracking-wider uppercase group relative"
-                                >
-                                    {item}
-                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#bef264] transition-all duration-300 group-hover:w-full"></span>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-                    {/* Mobile Menu Button */}
-                    <div className="-mr-2 flex md:hidden">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            type="button"
-                            className="bg-transparent inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-[#bef264] focus:outline-none"
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            {!isOpen ? (
-                                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                            ) : (
-                                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            )}
-                        </button>
-                    </div>
-                </div>
-            </div>
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
 
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-white/10 absolute w-full left-0 top-16 shadow-xl">
-                    <div className="px-4 py-6 space-y-4 flex flex-col items-center">
-                        <a href="#home" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-[#bef264] hover:bg-white/5 w-full text-center py-3 rounded-lg text-lg font-medium transition-all">Home</a>
-                        <a href="#about" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-[#bef264] hover:bg-white/5 w-full text-center py-3 rounded-lg text-lg font-medium transition-all">About</a>
-                        <a href="#skills" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-[#bef264] hover:bg-white/5 w-full text-center py-3 rounded-lg text-lg font-medium transition-all">Skills</a>
-                        <a href="#projects" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-[#bef264] hover:bg-white/5 w-full text-center py-3 rounded-lg text-lg font-medium transition-all">Projects</a>
-                        <a href="#contact" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-[#bef264] hover:bg-white/5 w-full text-center py-3 rounded-lg text-lg font-medium transition-all">Contact</a>
-                    </div>
-                </div>
-            )}
-        </nav>
-    );
+  const navLinks = [
+    { label: 'HOME', href: '#home' },
+    { label: 'ABOUT', href: '#about' },
+    { label: 'WORK', href: '#work' },
+    { label: 'CONTACT', href: '#contact' },
+  ];
+
+  return (
+    <>
+      <nav
+        id="main-nav"
+        className="fixed top-0 left-0 w-full z-[1000] transition-all duration-500"
+        style={{
+          backgroundColor: scrolled ? 'rgba(244, 241, 236, 0.95)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(10px)' : 'none',
+          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
+        }}
+      >
+        <div className="container flex items-center justify-between" style={{ height: '72px' }}>
+          {/* Logo */}
+          <a href="#home" className="font-display font-bold text-[18px] tracking-[-0.02em] uppercase">
+            NEXORA DEV
+          </a>
+
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="font-mono text-[11px] tracking-[0.1em] uppercase text-[var(--text-muted)] hover:text-[var(--text)] transition-colors duration-300"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-[6px] bg-transparent border-none"
+            aria-label="Toggle menu"
+            id="mobile-menu-toggle"
+          >
+            <span
+              className="block w-6 h-[1.5px] bg-[var(--text)] transition-all duration-300"
+              style={{
+                transform: isOpen ? 'rotate(45deg) translateY(3.75px)' : 'none',
+              }}
+            />
+            <span
+              className="block w-6 h-[1.5px] bg-[var(--text)] transition-all duration-300"
+              style={{
+                transform: isOpen ? 'rotate(-45deg) translateY(-3.75px)' : 'none',
+                opacity: isOpen ? 1 : 1,
+              }}
+            />
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Fullscreen Menu */}
+      <div
+        className="fixed inset-0 z-[999] flex flex-col items-center justify-center md:hidden transition-all duration-500"
+        style={{
+          backgroundColor: 'var(--bg)',
+          opacity: isOpen ? 1 : 0,
+          pointerEvents: isOpen ? 'auto' : 'none',
+          transform: isOpen ? 'none' : 'translateY(-20px)',
+        }}
+      >
+        <div className="flex flex-col items-center gap-10">
+          {navLinks.map((link, i) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="font-display text-[36px] font-bold tracking-[-0.02em] uppercase hover:opacity-50 transition-opacity duration-300"
+              style={{
+                transitionDelay: isOpen ? `${i * 80}ms` : '0ms',
+                opacity: isOpen ? 1 : 0,
+                transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
+                transition: 'opacity 0.4s ease, transform 0.4s ease',
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Navbar;

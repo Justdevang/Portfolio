@@ -1,66 +1,237 @@
-import { TextAnimate } from './magicui/TextAnimate';
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-    return (
-        <section id="home" className="min-h-screen flex items-center justify-center relative z-10 px-4 sm:px-6 lg:px-8 pt-24 pb-32">
-            <div className="max-w-7xl w-full flex flex-col items-center justify-center">
+  const sectionRef = useRef(null);
+  const headingRef = useRef(null);
+  const infoRef = useRef(null);
+  const reelSectionRef = useRef(null);
+  const reelContainerRef = useRef(null);
+  const videoRef = useRef(null);
+  const scrollRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
 
-                <div className="w-full flex flex-col items-center justify-center text-center z-10">
-                    <div className="flex justify-center items-center gap-2 mb-6">
-                        <div className="relative">
-                            <div className="w-2.5 h-2.5 bg-[#bef264] rounded-full animate-pulse shadow-[0_0_8px_#bef264]"></div>
-                            <div className="absolute inset-0 w-2.5 h-2.5 bg-[#bef264] rounded-full animate-ping opacity-75"></div>
-                        </div>
-                        <span className="text-gray-400 text-lg font-medium tracking-wide">Hi, I'm Devang. 👋</span>
-                    </div>
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Stagger headline words
+      const words = headingRef.current?.querySelectorAll('.hero-word');
+      gsap.fromTo(
+        words,
+        { y: 120, opacity: 0, rotateX: -40 },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power4.out',
+          delay: 0.3,
+        }
+      );
 
-                    <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 leading-[1.1] text-white font-inter tracking-tighter drop-shadow-[0_0_15px_rgba(190,242,100,0.2)]">
-                        <TextAnimate 
-                            animation="blurIn" 
-                            by="character"
-                            as="span"
-                            once={true}
-                            startOnView={false}
-                            delay={2.6}
-                        >
-                            WEB
-                        </TextAnimate>
-                        <br />
-                        <TextAnimate 
-                            animation="blurIn" 
-                            by="character"
-                            as="span"
-                            delay={3.0}
-                            once={true}
-                            startOnView={false}
-                            className="font-playfair italic text-[#bef264] font-normal tracking-tight"
-                        >
-                            DEVELOPER
-                        </TextAnimate>
-                    </h1>
+      // Info block
+      gsap.fromTo(
+        infoRef.current,
+        { opacity: 0, x: 30 },
+        { opacity: 1, x: 0, duration: 1, ease: 'power3.out', delay: 1.2 }
+      );
 
-                    <p className="max-w-xl mx-auto text-base md:text-lg text-white/90 leading-relaxed mb-10">
-                        I build modern, interactive web experiences. Specialized in <span className="text-white font-semibold">React.js</span> and <span className="text-white font-semibold">Three.js</span>, I transform complex ideas into fast, responsive, and visually stunning digital products.
-                    </p>
+      // Scroll indicator
+      gsap.fromTo(
+        scrollRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8, delay: 2 }
+      );
 
-                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                        <a
-                            href="#projects"
-                            className="group relative px-6 py-3.5 rounded-full bg-[#bef264] text-black font-bold text-sm transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(190,242,100,0.4)] active:scale-95 overflow-hidden"
-                        >
-                            <span className="relative z-10">View My Work</span>
-                        </a>
-                        <a
-                            href="#contact"
-                            className="px-6 py-3.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white hover:border-[#bef264]/50 hover:text-[#bef264] font-semibold text-sm transition-all hover:bg-white/10 active:scale-95 shadow-lg"
-                        >
-                            Contact Me
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+      // Fade out scroll indicator on scroll
+      gsap.to(scrollRef.current, {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=150',
+          scrub: true,
+        },
+      });
+
+      // ─── Showreel: clip-path reveal ───
+      // The reel section starts with the video clipped to a small rounded rect
+      // in the center, then as you scroll it reveals to full width
+      const mm = gsap.matchMedia();
+
+      mm.add('(min-width: 768px)', () => {
+        // Animate from small centered clip to full
+        gsap.fromTo(
+          reelContainerRef.current,
+          {
+            clipPath: 'inset(25% 30% 25% 30% round 12px)',
+          },
+          {
+            clipPath: 'inset(0% 0% 0% 0% round 0px)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: reelSectionRef.current,
+              start: 'top 80%',
+              end: 'top 10%',
+              scrub: 0.3,
+            },
+          }
+        );
+      });
+
+      mm.add('(max-width: 767px)', () => {
+        gsap.fromTo(
+          reelContainerRef.current,
+          {
+            clipPath: 'inset(15% 10% 15% 10% round 8px)',
+          },
+          {
+            clipPath: 'inset(0% 0% 0% 0% round 0px)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: reelSectionRef.current,
+              start: 'top 85%',
+              end: 'top 30%',
+              scrub: 0.3,
+            },
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  return (
+    <section
+      id="home"
+      ref={sectionRef}
+      className="relative flex flex-col"
+    >
+      {/* Top Area: Headline + Info */}
+      <div
+        className="container flex-1 flex flex-col lg:flex-row items-start justify-between gap-8"
+        style={{ minHeight: '85vh', paddingTop: '50px' }}
+      >
+        {/* Main Headline */}
+        <div className="flex-1 pt-4 lg:pt-12" ref={headingRef} style={{ perspective: '800px' }}>
+          <h1 className="hero-heading">
+            {[
+              { text: 'I build digital', italic: false },
+              { text: 'experiences with', italic: false },
+              { text: 'structure and', italic: false },
+              { text: 'intention.', italic: true },
+              { text: 'Then I make', italic: false },
+              { text: 'them move.', italic: true },
+            ].map((line, i) => (
+              <span key={i} className="block overflow-hidden">
+                <span
+                  className={`hero-word inline-block ${line.italic ? 'hero-italic' : ''}`}
+                  style={{ display: 'inline-block' }}
+                >
+                  {line.text}
+                </span>
+              </span>
+            ))}
+          </h1>
+        </div>
+
+        {/* Right Info Block */}
+        <div
+          ref={infoRef}
+          className="flex flex-col items-start lg:items-end gap-3 lg:pt-20 lg:text-right"
+          style={{ opacity: 0, minWidth: '200px' }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <div className="status-dot" />
+            <span className="font-mono text-[11px] tracking-[0.1em] uppercase">
+              Available for work
+            </span>
+          </div>
+          <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">
+            Web Design
+          </span>
+          <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">
+            Web Development
+          </span>
+          <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">
+            Based in Pune, India.
+          </span>
+        </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div
+        ref={scrollRef}
+        className="flex flex-col items-center gap-2 scroll-indicator py-6"
+        style={{ opacity: 0 }}
+      >
+        <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--text-muted)]">
+          Scroll
+        </span>
+        <svg
+          width="16"
+          height="24"
+          viewBox="0 0 16 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          <path d="M8 4 L8 20 M3 15 L8 20 L13 15" />
+        </svg>
+      </div>
+
+      {/* Showreel — clip-path reveal */}
+      <div ref={reelSectionRef} className="reel-section">
+        <div ref={reelContainerRef} className="reel-container">
+          <video
+            ref={videoRef}
+            src="/showreel.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="reel-video"
+          />
+          {/* Overlay controls */}
+          <div className="reel-overlay">
+            <button
+              className="reel-play-btn"
+              onClick={togglePlay}
+              aria-label={isPlaying ? 'Pause showreel' : 'Play showreel'}
+            >
+              {isPlaying ? (
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                  <rect x="4" y="3" width="4" height="14" rx="1" />
+                  <rect x="12" y="3" width="4" height="14" rx="1" />
+                </svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                  <path d="M5 3 L17 10 L5 17Z" />
+                </svg>
+              )}
+            </button>
+            <span className="reel-label">Showreel</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Hero;

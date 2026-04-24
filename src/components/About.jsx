@@ -1,30 +1,109 @@
-import RevealOnScroll from './RevealOnScroll';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
-    return (
-        <section id="about" className="py-16 md:py-24 relative z-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <RevealOnScroll>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
-                        <span className="text-white">About </span>
-                        <span className="font-playfair italic text-[#bef264]">Me</span>
-                    </h2>
+  const sectionRef = useRef(null);
 
-                    <div className="max-w-3xl mx-auto text-base text-gray-300 leading-relaxed text-center bg-white/5 backdrop-blur-sm p-8 rounded-3xl border border-white/10 hover:border-[#bef264]/40 transition-all duration-500 shadow-2xl">
-                        <p className="mb-6">
-                            I am a passionate <span className="text-white font-semibold underline decoration-[#bef264]/30 decoration-2 underline-offset-4">Full-Stack Developer</span> dedicated to crafting high-performance, scalable web applications that solve real-world problems. With a deep focus on user-centric design and clean, maintainable architecture, I bridge the gap between complex backend logic and intuitive frontend experiences.
-                        </p>
-                        <p className="mb-6">
-                            My expertise lies in the modern JavaScript ecosystem, where I leverage tools like <span className="text-white font-medium">React.js</span>, <span className="text-white font-medium">Three.js</span>, and <span className="text-[#bef264] font-medium">Node.js</span> to build immersive, responsive digital products. I believe that great code is not just about functionality—it's about performance, accessibility, and delighting users at every interaction.
-                        </p>
-                        <p className="text-gray-400 italic font-light">
-                            Constantly exploring emerging technologies and design patterns to stay at the forefront of the digital landscape.
-                        </p>
-                    </div>
-                </RevealOnScroll>
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray('.about-reveal').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      });
+
+      // Animate the divider line
+      gsap.fromTo(
+        '.about-line',
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.about-line',
+            start: 'top 90%',
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const stats = [
+    { number: '1+', label: 'Years Experience' },
+    { number: '3+', label: 'Projects Delivered' },
+    { number: '100%', label: 'Client Satisfaction' },
+  ];
+
+  return (
+    <section id="about" ref={sectionRef} className="section">
+      <div className="container">
+        {/* Section Label */}
+        <div className="about-reveal mb-12">
+          <span className="section-label">( about me )</span>
+        </div>
+
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16">
+          {/* Left Tag */}
+          <div className="lg:col-span-4 about-reveal">
+            <p className="font-mono text-[11px] tracking-[0.1em] uppercase text-[var(--text-muted)] leading-relaxed">
+              The Solo Developer ·<br />
+              Working Globally ·<br />
+              Based in Pune.
+            </p>
+          </div>
+
+          {/* Right Paragraph */}
+          <div className="lg:col-span-8 about-reveal">
+            <p className="text-[clamp(20px,2.5vw,32px)] font-display font-medium leading-[1.4] tracking-[-0.01em]">
+              I build websites (mostly) and brand identities (definitely).
+              I spend 70% of my time perfecting layouts and the other 30%
+              making sure they move like a dream. Basically, I build the
+              digital stage so your brand can finally perform.
+            </p>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <hr
+          className="about-line divider mb-12"
+          style={{ transformOrigin: 'left' }}
+        />
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 about-reveal">
+          {stats.map((stat, i) => (
+            <div key={i} className="flex flex-col gap-2">
+              <span className="font-display text-[clamp(36px,4vw,56px)] font-bold tracking-[-0.03em] leading-none">
+                {stat.number}
+              </span>
+              <span className="font-mono text-[11px] tracking-[0.1em] uppercase text-[var(--text-muted)]">
+                {stat.label}
+              </span>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default About;
