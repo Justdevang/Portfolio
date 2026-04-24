@@ -9,7 +9,7 @@ const capabilities = [
     number: '01',
     title: 'Frontend Development',
     description: 'I build fast, responsive, and visually engaging user interfaces using HTML, CSS, JavaScript, React, and modern frameworks. Every interface is optimized for performance, usability, and seamless interaction across all devices.',
-    image: '/images/capability-frontend.png',
+    image: '/images/capabilities-frontend.png',
   },
   {
     number: '02',
@@ -85,43 +85,51 @@ const Capabilities = () => {
               {/* Top divider */}
               <hr className="divider" />
 
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-                className="w-full text-left py-8 flex items-start gap-6 lg:gap-10 bg-transparent border-none group"
-                aria-expanded={openIndex === i}
-                id={`capability-${cap.number}`}
-              >
-                {/* Decorative Number */}
-                <span className="font-display text-[clamp(48px,6vw,96px)] font-bold leading-none opacity-[0.08] select-none shrink-0 -mt-2">
-                  {cap.number}
-                </span>
+              <div className="relative">
+                <button
+                  onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
+                  className="w-full text-left py-6 lg:py-8 flex items-center gap-6 lg:gap-10 bg-transparent border-none group"
+                  aria-expanded={openIndex === i}
+                  id={`capability-${cap.number}`}
+                >
+                  {/* Decorative Number */}
+                  <span className="font-display text-[clamp(40px,5vw,72px)] font-bold leading-none opacity-[0.08] select-none shrink-0">
+                    {cap.number}
+                  </span>
 
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="heading-md mb-0 group-hover:opacity-60 transition-opacity duration-300">
+                  {/* Title */}
+                  <h3 className="heading-md mb-0 flex-1 group-hover:opacity-60 transition-opacity duration-300">
                     {cap.title}
                   </h3>
 
-                  <div
-                    className="capability-content"
+                  {/* Toggle Icon */}
+                  <span
+                    className="font-display text-[20px] leading-none shrink-0 transition-transform duration-300"
                     style={{
-                      maxHeight: openIndex === i ? '600px' : '0',
+                      transform: openIndex === i ? 'rotate(45deg)' : 'rotate(0)',
                     }}
                   >
-                    <div className="pt-4 pb-2 grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    +
+                  </span>
+                </button>
+
+                {/* Collapsible Content (Now outside button) */}
+                <div
+                  className={`capability-content ${openIndex === i ? 'open' : ''}`}
+                >
+                  <div className="pb-8 lg:pb-12 pl-[clamp(64px,8vw,112px)]">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                       <p className="body-lg max-w-md">{cap.description}</p>
                       <div
-                        className="overflow-hidden rounded"
+                        className="overflow-hidden rounded-sm border border-black/5"
                         style={{
-                          maxWidth: '400px',
-                          aspectRatio: '16/10',
-                          backgroundColor: '#E8E4DD',
+                          maxWidth: '600px',
                         }}
                       >
                         <img
                           src={cap.image}
                           alt={cap.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-auto block"
                           loading="lazy"
                           onError={(e) => {
                             e.target.style.display = 'none';
@@ -131,17 +139,7 @@ const Capabilities = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Toggle Icon */}
-                <span
-                  className="font-display text-[24px] leading-none shrink-0 mt-2 transition-transform duration-300"
-                  style={{
-                    transform: openIndex === i ? 'rotate(45deg)' : 'rotate(0)',
-                  }}
-                >
-                  +
-                </span>
-              </button>
+              </div>
             </div>
           ))}
           {/* Bottom divider */}

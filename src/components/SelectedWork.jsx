@@ -164,8 +164,7 @@ const SelectedWork = () => {
           alt=""
           className={`project-hover-img ${hoveredIdx >= 0 ? 'visible' : ''}`}
           style={{
-            left: `${mousePos.x + 20}px`,
-            top: `${mousePos.y - 140}px`,
+            transform: `translate(${mousePos.x + 20}px, ${mousePos.y - 120}px) scale(${hoveredIdx >= 0 ? 1 : 0.95})`,
           }}
           onError={(e) => {
             e.target.style.opacity = '0';

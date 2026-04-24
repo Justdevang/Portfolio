@@ -28,8 +28,7 @@ const CustomCursor = () => {
     const animate = () => {
       pos.current.x += (target.current.x - pos.current.x) * 0.15;
       pos.current.y += (target.current.y - pos.current.y) * 0.15;
-      cursor.style.left = `${pos.current.x}px`;
-      cursor.style.top = `${pos.current.y}px`;
+      cursor.style.transform = `translate(${pos.current.x - 6}px, ${pos.current.y - 6}px)`;
       raf = requestAnimationFrame(animate);
     };
 

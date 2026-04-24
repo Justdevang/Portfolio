@@ -69,10 +69,10 @@ const Hero = ({ isReady }) => {
         gsap.fromTo(
           reelContainerRef.current,
           {
-            clipPath: 'inset(25% 30% 25% 30% round 12px)',
+            scale: 0.6,
           },
           {
-            clipPath: 'inset(0% 0% 0% 0% round 0px)',
+            scale: 1,
             ease: 'none',
             scrollTrigger: {
               trigger: reelSectionRef.current,
@@ -88,10 +88,10 @@ const Hero = ({ isReady }) => {
         gsap.fromTo(
           reelContainerRef.current,
           {
-            clipPath: 'inset(15% 10% 15% 10% round 8px)',
+            scale: 0.8,
           },
           {
-            clipPath: 'inset(0% 0% 0% 0% round 0px)',
+            scale: 1,
             ease: 'none',
             scrollTrigger: {
               trigger: reelSectionRef.current,

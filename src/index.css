@@ -13,24 +13,33 @@ html {
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Only GPU-promote elements that actually animate */
+.custom-cursor,
+nav,
+header,
+.reel-container,
+.marquee-track,
+.days-track,
+.tool-float-1,
+.tool-float-2,
+.tool-float-3,
+.tool-float-4,
+.tool-float-5 {
+  transform: translateZ(0);
+  will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-img, video, canvas {
+/* Images — GPU layer but no will-change to save RAM */
+img {
   transform: translateZ(0);
-  will-change: transform;
-}
-
-nav, header, .sticky, .navbar {
-  transform: translateZ(0);
-  will-change: transform;
-  isolation: isolate;
 }
 
 /* --- Base Styles --- */
 :root {
-...
   /* Colors */
   --bg: #F4F1EC;
   --bg-dark: #0D0D0D;
@@ -46,10 +55,10 @@ nav, header, .sticky, .navbar {
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Space Mono', monospace;
 
-  /* Spacing */
-  --section-pad: clamp(80px, 10vw, 160px);
-  --grid-gap: clamp(24px, 3vw, 48px);
-  --side-pad: clamp(20px, 5vw, 80px);
+  /* Spacing - Scaled down */
+  --section-pad: clamp(40px, 5vw, 80px);
+  --grid-gap: clamp(16px, 2vw, 32px);
+  --side-pad: clamp(16px, 4vw, 64px);
 
   /* Transitions */
   --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -123,10 +132,10 @@ img {
   color: var(--text-muted);
 }
 
-/* Hero heading — big, bold, editorial */
+/* Hero heading — scaled down for elegance */
 .hero-heading {
   font-family: var(--font-display);
-  font-size: clamp(40px, 7vw, 100px);
+  font-size: clamp(32px, 6vw, 82px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.035em;
@@ -140,7 +149,7 @@ img {
 /* Section headings */
 .heading-xl {
   font-family: var(--font-display);
-  font-size: clamp(36px, 6vw, 88px);
+  font-size: clamp(28px, 5vw, 72px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -149,7 +158,7 @@ img {
 
 .heading-lg {
   font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 56px);
+  font-size: clamp(24px, 3.5vw, 48px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -158,21 +167,21 @@ img {
 
 .heading-md {
   font-family: var(--font-display);
-  font-size: clamp(20px, 2.5vw, 36px);
+  font-size: clamp(18px, 2vw, 32px);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
 .body-lg {
-  font-size: clamp(15px, 1.3vw, 18px);
-  line-height: 1.7;
+  font-size: clamp(14px, 1.1vw, 17px);
+  line-height: 1.6;
   color: var(--text-muted);
 }
 
 .decorative-number {
   font-family: var(--font-display);
-  font-size: clamp(60px, 8vw, 120px);
+  font-size: clamp(48px, 7vw, 100px);
   font-weight: 700;
   line-height: 1;
   color: var(--text);
@@ -188,9 +197,15 @@ img {
   padding-right: var(--side-pad);
 }
 
+.section,
+.reel-section,
+.marquee-track {
+  contain: layout paint;
+}
+
 .section {
   padding-top: var(--section-pad);
-  padding-bottom: var(--section-pad);
+  padding-bottom: clamp(20px, 3vw, 40px);
 }
 
 .divider {
@@ -238,8 +253,10 @@ img {
   max-height: 80vh;
   background-color: var(--bg-dark);
   overflow: hidden;
-  /* Initial clip state — will be animated by GSAP */
-  clip-path: inset(25% 30% 25% 30% round 12px);
+  border-radius: 12px;
+  /* Replaced clip-path with transform for better performance */
+  transform: scale(0.6) translateZ(0);
+  will-change: transform;
 }
 
 .reel-video {
@@ -269,18 +286,12 @@ img {
   height: 40px;
   border-radius: 50%;
   border: 1.5px solid rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s var(--ease);
   cursor: none;
-  /* Performance Fix for blurred elements */
-  transform: translateZ(0);
-  will-change: transform;
-  isolation: isolate;
 }
 
 .reel-play-btn:hover {
@@ -330,11 +341,12 @@ img {
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: difference;
   transition: width 0.3s var(--ease-out),
     height 0.3s var(--ease-out),
     background 0.3s var(--ease-out);
-  transform: translate(-50%, -50%);
+  /* Use fixed size translate to avoid top/left layout jank */
+  transform: translate(-6px, -6px);
+  will-change: transform;
 }
 
 .custom-cursor.hovering {
@@ -393,65 +405,30 @@ img {
   color: var(--text);
 }
 
-/* Float keyframes — each slightly different for organic feel */
+/* Float keyframes — removed rotate() for better scroll performance */
 @keyframes tool-bob-1 {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-14px) rotate(1.5deg);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
 }
 
 @keyframes tool-bob-2 {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-10px) rotate(-1deg);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes tool-bob-3 {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes tool-bob-4 {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-12px) rotate(2deg);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 
 @keyframes tool-bob-5 {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-16px) rotate(-1.5deg);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
 }
 
 .tool-float-1 {
@@ -478,15 +455,19 @@ img {
 
 .project-hover-img {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 360px;
   height: 240px;
   object-fit: cover;
   pointer-events: none;
   z-index: 100;
   opacity: 0;
-  transform: scale(0.95);
+  /* Removed top/left, using transform for performance */
+  transform: translate(0, 0) scale(0.95);
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
   border-radius: 6px;
+  will-change: transform;
 }
 
 .project-hover-img.visible {
@@ -570,13 +551,18 @@ img {
 /* ── Capability Accordion ───────────────────────── */
 
 .capability-content {
-  max-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
   overflow: hidden;
-  transition: max-height 0.6s var(--ease-out);
+  transition: grid-template-rows 0.5s var(--ease-out);
+}
+
+.capability-content > div {
+  min-height: 0;
 }
 
 .capability-content.open {
-  max-height: 600px;
+  grid-template-rows: 1fr;
 }
 
 /* ── Form Styles ────────────────────────────────── */
@@ -707,6 +693,11 @@ img {
 }
 
 @keyframes loader-progress {
-  0% { transform: scaleX(0); }
-  100% { transform: scaleX(1); }
+  0% {
+    transform: scaleX(0);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
 }
