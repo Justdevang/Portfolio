@@ -9,19 +9,22 @@ const projects = [
     number: '01',
     name: 'Learnpath',
     tags: ['PRODUCT DESIGN', 'WEB DEVELOPMENT'],
-    image: '/Learnpath.png',
+    image: '/images/learnpath-hover-image.png',
+    url: '#',
   },
   {
     number: '02',
     name: 'Soundabode',
     tags: ['BRANDING', 'WEB DEVELOPMENT'],
-    image: '/project-soundabode.png',
+    image: '/images/soundabode-hover-image.png',
+    url: 'https://soundabode.com',
   },
   {
     number: '03',
     name: 'Avira OS',
     tags: ['AUTOMATION', 'WEB APP'],
     image: '/project-soundabode.png',
+    url: '#',
   },
 ];
 
@@ -107,12 +110,18 @@ const SelectedWork = () => {
                 className="work-line divider"
                 style={{ transformOrigin: 'left' }}
               />
-              <div
+              <a
+                href={project.url}
+                target={project.url === '#' ? undefined : "_blank"}
+                rel={project.url === '#' ? undefined : "noopener noreferrer"}
                 className="project-row py-8 lg:py-10 flex items-center gap-6 lg:gap-10 transition-opacity duration-300"
                 onMouseEnter={() => setHoveredIdx(i)}
                 onMouseLeave={() => setHoveredIdx(-1)}
                 style={{
                   opacity: hoveredIdx !== -1 && hoveredIdx !== i ? 0.3 : 1,
+                  display: 'flex',
+                  textDecoration: 'none',
+                  color: 'inherit'
                 }}
                 data-cursor-hover
               >
@@ -146,7 +155,7 @@ const SelectedWork = () => {
                 <span className="font-display text-[20px] shrink-0 opacity-30">
                   →
                 </span>
-              </div>
+              </a>
             </div>
           ))}
           <hr
@@ -164,7 +173,7 @@ const SelectedWork = () => {
           alt=""
           className={`project-hover-img ${hoveredIdx >= 0 ? 'visible' : ''}`}
           style={{
-            transform: `translate(${mousePos.x + 20}px, ${mousePos.y - 120}px) scale(${hoveredIdx >= 0 ? 1 : 0.95})`,
+            transform: `translate(${mousePos.x + 30}px, ${mousePos.y}px) translateY(-50%) scale(${hoveredIdx >= 0 ? 1 : 0.95})`,
           }}
           onError={(e) => {
             e.target.style.opacity = '0';

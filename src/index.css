@@ -407,28 +407,63 @@ img {
 
 /* Float keyframes — removed rotate() for better scroll performance */
 @keyframes tool-bob-1 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
 }
 
 @keyframes tool-bob-2 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes tool-bob-3 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes tool-bob-4 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 @keyframes tool-bob-5 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-16px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-16px);
+  }
 }
 
 .tool-float-1 {
@@ -457,17 +492,19 @@ img {
   position: fixed;
   top: 0;
   left: 0;
-  width: 360px;
-  height: 240px;
-  object-fit: cover;
+  max-width: 400px;
+  width: auto;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
   pointer-events: none;
   z-index: 100;
   opacity: 0;
-  /* Removed top/left, using transform for performance */
   transform: translate(0, 0) scale(0.95);
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
-  border-radius: 6px;
+  border-radius: 8px;
   will-change: transform;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .project-hover-img.visible {
@@ -557,7 +594,7 @@ img {
   transition: grid-template-rows 0.5s var(--ease-out);
 }
 
-.capability-content > div {
+.capability-content>div {
   min-height: 0;
 }
 
