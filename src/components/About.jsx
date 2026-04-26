@@ -1,50 +1,11 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
 
-gsap.registerPlugin(ScrollTrigger);
+// All animation is driven by Hero.jsx's master scrubbed timeline.
+// Initial hidden state is set via inline style (not GSAP) so it's
+// guaranteed to be opacity:0 before any JS runs.
 
 const About = () => {
   const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray('.about-reveal').forEach((el) => {
-        gsap.fromTo(
-          el,
-          { y: 50, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
-
-      // Animate the divider line
-      gsap.fromTo(
-        '.about-line',
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 1.2,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.about-line',
-            start: 'top 90%',
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const stats = [
     { number: '1+', label: 'Years Experience' },
@@ -53,27 +14,78 @@ const About = () => {
   ];
 
   return (
-    <section id="about" ref={sectionRef} className="section">
-      <div className="container">
-        {/* Section Label */}
-        <div className="about-reveal mb-12">
-          <span className="section-label">( about me )</span>
+    <section
+      id="about"
+      ref={sectionRef}
+      style={{
+        marginTop: '-100vh',
+        position: 'relative',
+        zIndex: 60,
+        backgroundColor: 'transparent',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        paddingTop: '80px',
+        paddingBottom: '80px',
+        pointerEvents: 'none',
+      }}
+    >
+      {/* opacity:0 set here in CSS-land, not via GSAP, so it's always hidden on mount */}
+      <div
+        className="about-overlay-content container"
+        style={{ width: '100%', pointerEvents: 'auto', opacity: 0, transform: 'translateY(60px)' }}
+      >
+
+        <div
+          className="about-reveal"
+          style={{ marginBottom: '48px', opacity: 0, transform: 'translateY(50px)' }}
+        >
+          <span
+            className="section-label"
+            style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: '0.15em' }}
+          >
+            ( about me )
+          </span>
         </div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16">
-          {/* Left Tag */}
-          <div className="lg:col-span-4 about-reveal">
-            <p className="font-mono text-[11px] tracking-[0.1em] uppercase text-[var(--text-muted)] leading-relaxed">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16"
+          style={{ marginBottom: '64px' }}
+        >
+          <div
+            className="lg:col-span-4 about-reveal"
+            style={{ opacity: 0, transform: 'translateY(50px)' }}
+          >
+            <p
+              className="font-mono"
+              style={{
+                fontSize: '11px',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.45)',
+                lineHeight: 2,
+              }}
+            >
               The Solo Developer ·<br />
               Working Globally ·<br />
               Based in Pune.
             </p>
           </div>
 
-          {/* Right Paragraph */}
-          <div className="lg:col-span-8 about-reveal">
-            <p className="text-[clamp(20px,2.5vw,32px)] font-display font-medium leading-[1.4] tracking-[-0.01em]">
+          <div
+            className="lg:col-span-8 about-reveal"
+            style={{ opacity: 0, transform: 'translateY(50px)' }}
+          >
+            <p
+              className="font-display"
+              style={{
+                fontSize: 'clamp(20px, 2.5vw, 34px)',
+                fontWeight: 500,
+                lineHeight: 1.4,
+                letterSpacing: '-0.01em',
+                color: '#ffffff',
+              }}
+            >
               I build websites (mostly) and brand identities (definitely).
               I spend 70% of my time perfecting layouts and the other 30%
               making sure they move like a dream. Basically, I build the
@@ -82,25 +94,52 @@ const About = () => {
           </div>
         </div>
 
-        {/* Divider */}
         <hr
-          className="about-line divider mb-12"
-          style={{ transformOrigin: 'left' }}
+          className="about-line"
+          style={{
+            width: '100%',
+            height: '1px',
+            background: 'rgba(255,255,255,0.18)',
+            border: 'none',
+            marginBottom: '48px',
+            transform: 'scaleX(0)',
+            transformOrigin: 'left',
+          }}
         />
 
-        {/* Stats Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 about-reveal">
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 about-reveal"
+          style={{ opacity: 0, transform: 'translateY(50px)' }}
+        >
           {stats.map((stat, i) => (
-            <div key={i} className="flex flex-col gap-2">
-              <span className="font-display text-[clamp(36px,4vw,56px)] font-bold tracking-[-0.03em] leading-none">
+            <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <span
+                className="font-display"
+                style={{
+                  fontSize: 'clamp(36px, 4vw, 56px)',
+                  fontWeight: 700,
+                  letterSpacing: '-0.03em',
+                  lineHeight: 1,
+                  color: '#ffffff',
+                }}
+              >
                 {stat.number}
               </span>
-              <span className="font-mono text-[11px] tracking-[0.1em] uppercase text-[var(--text-muted)]">
+              <span
+                className="font-mono"
+                style={{
+                  fontSize: '11px',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(255,255,255,0.45)',
+                }}
+              >
                 {stat.label}
               </span>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

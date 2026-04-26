@@ -8,17 +8,14 @@ const Hero = ({ isReady }) => {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const infoRef = useRef(null);
-  const reelSectionRef = useRef(null);
   const scrollRef = useRef(null);
   const cardRef = useRef(null);
-  const nexusGridRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const fixedOverlayRef = useRef(null);
   const [timeCode, setTimeCode] = useState('00:00:00:00');
 
   useEffect(() => {
     if (!isReady) return;
 
-    // Live Timecode Simulation
     const startTime = Date.now();
     const timerInterval = setInterval(() => {
       const now = Date.now();
@@ -32,78 +29,135 @@ const Hero = ({ isReady }) => {
       );
     }, 40);
 
+    // ─── CRITICAL: Select About elements BEFORE entering gsap.context ───
+    // gsap.context(fn, scopeEl) scopes ALL selectors inside fn to scopeEl.
+    // Since About elements live outside sectionRef (the Hero), any
+    // document.querySelectorAll('.about-reveal') inside the context would
+    // silently return nothing. We grab them here, in global scope.
+    const aboutContent = document.querySelector('.about-overlay-content');
+    const aboutReveals = gsap.utils.toArray('.about-reveal');
+    const aboutLine = document.querySelector('.about-line');
+
+    // These are already hidden via inline style in About.jsx (opacity:0, translateY:60px).
+    // No gsap.set() needed — the DOM itself is the source of truth for initial state.
+
     const ctx = gsap.context(() => {
       ScrollTrigger.refresh();
 
-      // Stagger headline words
+      // ─── Entry animations ───
       const words = headingRef.current?.querySelectorAll('.hero-word');
-      gsap.fromTo(
-        words,
+      gsap.fromTo(words,
         { y: 120, opacity: 0, rotateX: -40 },
-        {
-          y: 0,
-          opacity: 1,
-          rotateX: 0,
-          duration: 1.2,
-          stagger: 0.1,
-          ease: 'power4.out',
-          delay: 0.5,
-        }
+        { y: 0, opacity: 1, rotateX: 0, duration: 1.2, stagger: 0.1, ease: 'power4.out', delay: 0.5 }
       );
-
-      // Info block
-      gsap.fromTo(
-        infoRef.current,
+      gsap.fromTo(infoRef.current,
         { opacity: 0, x: 30 },
         { opacity: 1, x: 0, duration: 1, ease: 'power3.out', delay: 1.4 }
       );
-
-      // Scroll indicator
-      gsap.fromTo(
-        scrollRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, delay: 2.2 }
-      );
-
-      // Fade out scroll indicator on scroll
+      gsap.fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 2.2 });
       gsap.to(scrollRef.current, {
         opacity: 0,
+        scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: '+=150', scrub: true },
+      });
+
+      // ─── Sync fixed overlay to card position ───
+      const syncOverlayToCard = () => {
+        const rect = cardRef.current?.getBoundingClientRect();
+        if (!rect || !fixedOverlayRef.current) return;
+        gsap.set(fixedOverlayRef.current, {
+          top: rect.top,
+          left: rect.left,
+          width: rect.width,
+          height: rect.height,
+          borderRadius: 20,
+          opacity: 0,
+        });
+      };
+      syncOverlayToCard();
+
+      // ─── Master scrubbed timeline (pin = 200vh) ───
+      //
+      // Progress map:
+      //   0.00 → 0.20  Hero text/info exits, card fades out
+      //   0.05 → 0.15  Fixed overlay fades in (seamless card→overlay swap)
+      //   0.10 → 0.60  Overlay expands card rect → 100vw/100vh
+      //   0.60 → 0.78  Dark scrim fades in
+      //   0.78 → 1.00  About content reveals staggered
+      //
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=150',
-          scrub: true,
+          end: '+=200%',
+          scrub: 1.2,
+          pin: true,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            if (self.progress < 0.01) syncOverlayToCard();
+          },
         },
       });
 
-      // ─── Nexus Grid Reveal ───
-      gsap.fromTo(
-        nexusGridRef.current,
-        {
-          rotateX: 40,
-          rotateZ: -10,
-          scale: 0.8,
-          opacity: 0,
-          translateY: 100
-        },
-        {
-          rotateX: 20,
-          rotateZ: -5,
-          scale: 1,
-          opacity: 1,
-          translateY: 0,
-          duration: 1.5,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: reelSectionRef.current,
-            start: 'top 85%',
-            end: 'top 30%',
-            scrub: 1,
-          },
-        }
-      );
+      tl
+        // Hero exits
+        .to(headingRef.current, { opacity: 0, y: -60, duration: 0.3 }, 0)
+        .to(infoRef.current, { opacity: 0, x: 80, duration: 0.3 }, 0)
+        .to(cardRef.current, { opacity: 0, duration: 0.15 }, 0)
 
-      // Floating animation for 3D Card
+        // Fixed overlay swap
+        .to(fixedOverlayRef.current, { opacity: 1, duration: 0.15 }, 0.05)
+        .to(fixedOverlayRef.current, {
+          top: 0, left: 0,
+          width: '100vw', height: '100vh',
+          borderRadius: 0,
+          duration: 0.5,
+          ease: 'power2.inOut',
+        }, 0.1)
+
+        // Dark scrim
+        .to('.hero-bg-dark-overlay', {
+          opacity: 1,
+          duration: 0.25,
+          ease: 'power2.inOut',
+        }, 0.60)
+
+        // ── About reveals (using pre-grabbed DOM refs, NOT string selectors) ──
+        // aboutContent, aboutReveals, aboutLine were captured above the context
+        // so they correctly reference the About section's DOM elements.
+        .to(aboutContent, {
+          opacity: 1,
+          y: 0,
+          duration: 0.22,
+          ease: 'power2.out',
+        }, 0.78)
+        .to(aboutReveals, {
+          opacity: 1,
+          y: 0,
+          duration: 0.18,
+          stagger: 0.04,
+          ease: 'power2.out',
+        }, 0.80)
+        .to(aboutLine, {
+          scaleX: 1,
+          duration: 0.2,
+          ease: 'power2.out',
+        }, 0.88);
+
+      // ─── Phase 4: Retire overlay once About scrolls past ───
+      ScrollTrigger.create({
+        trigger: '#about',
+        start: 'bottom bottom',
+        onEnter: () => {
+          gsap.to(fixedOverlayRef.current, { opacity: 0, duration: 0.7, ease: 'power2.inOut' });
+          gsap.to('.hero-bg-dark-overlay', { opacity: 0, duration: 0.4 });
+        },
+        onLeaveBack: () => {
+          gsap.to(fixedOverlayRef.current, { opacity: 1, duration: 0.4 });
+          gsap.to('.hero-bg-dark-overlay', { opacity: 1, duration: 0.3 });
+        },
+      });
+
+      // Idle float on card
       gsap.to(cardRef.current, {
         y: -20,
         duration: 3,
@@ -111,7 +165,8 @@ const Hero = ({ isReady }) => {
         repeat: -1,
         yoyo: true,
       });
-    }, sectionRef);
+
+    }, sectionRef); // <-- context scoped to Hero only
 
     return () => {
       ctx.revert();
@@ -119,78 +174,57 @@ const Hero = ({ isReady }) => {
     };
   }, [isReady]);
 
-  // Magnetic Button Effect
-  const handleMagneticMove = (e) => {
-    const btn = e.currentTarget;
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
-    gsap.to(btn, {
-      x: x * 0.4,
-      y: y * 0.4,
-      duration: 0.3,
-      ease: 'power2.out',
-    });
-  };
-
-  const handleMagneticReset = (e) => {
-    gsap.to(e.currentTarget, {
-      x: 0,
-      y: 0,
-      duration: 0.5,
-      ease: 'elastic.out(1, 0.3)',
-    });
-  };
-
   const handleTilt = (e) => {
     if (!cardRef.current) return;
     const { clientX, clientY } = e;
     const { left, top, width, height } = cardRef.current.getBoundingClientRect();
-
     const x = (clientX - left) / width - 0.5;
     const y = (clientY - top) / height - 0.5;
-
-    gsap.to(cardRef.current, {
-      rotateY: x * 30 - 15,
-      rotateX: -y * 30 + 8,
-      duration: 0.5,
-      ease: 'power2.out',
-    });
+    gsap.to(cardRef.current, { rotateY: x * 30 - 15, rotateX: -y * 30 + 8, duration: 0.5, ease: 'power2.out' });
   };
 
   const handleTiltReset = () => {
-    gsap.to(cardRef.current, {
-      rotateY: -15,
-      rotateX: 8,
-      duration: 0.8,
-      ease: 'power2.out',
-    });
-  };
-
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    } else {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
+    gsap.to(cardRef.current, { rotateY: -15, rotateX: 8, duration: 0.8, ease: 'power2.out' });
   };
 
   return (
-    <section
-      id="home"
-      ref={sectionRef}
-      className="relative flex flex-col"
-    >
-      {/* Top Area: Headline + Info */}
+    <section id="home" ref={sectionRef} className="relative flex flex-col">
+
+      {/* Fixed fullscreen overlay */}
+      <div
+        ref={fixedOverlayRef}
+        style={{
+          position: 'fixed',
+          overflow: 'hidden',
+          zIndex: 50,
+          pointerEvents: 'none',
+          opacity: 0,
+          willChange: 'top, left, width, height, border-radius, opacity',
+        }}
+      >
+        <img
+          src="/images/Untitled (15).png"
+          alt="Digital Experience"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
+        />
+        <div
+          className="hero-bg-dark-overlay"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'rgba(0,0,0,0.52)',
+            opacity: 0,
+            zIndex: 2,
+            pointerEvents: 'none',
+          }}
+        />
+      </div>
+
+      {/* Hero layout */}
       <div
         className="container flex-1 flex flex-col lg:flex-row items-start justify-between gap-8"
         style={{ minHeight: '85vh', paddingTop: '50px' }}
       >
-        {/* Main Headline */}
         <div className="flex-1 pt-4 lg:pt-12" ref={headingRef} style={{ perspective: '800px' }}>
           <h1 className="hero-heading">
             {[
@@ -213,9 +247,7 @@ const Hero = ({ isReady }) => {
           </h1>
         </div>
 
-        {/* Right Area: 3D Image + Info Block */}
         <div className="flex-1 flex flex-col items-center lg:items-end justify-center gap-12 lg:pt-12">
-          {/* 3D Floating Image */}
           <div
             className="hero-3d-container"
             style={{ perspective: '1200px' }}
@@ -228,12 +260,10 @@ const Hero = ({ isReady }) => {
                 alt="Digital Experience"
                 className="hero-3d-image"
               />
-              {/* Decorative elements for 3D depth */}
               <div className="hero-3d-glow" />
             </div>
           </div>
 
-          {/* Right Info Block */}
           <div
             ref={infoRef}
             className="flex flex-col items-start lg:items-end gap-3 lg:text-right"
@@ -241,103 +271,21 @@ const Hero = ({ isReady }) => {
           >
             <div className="flex items-center gap-2 mb-2">
               <div className="status-dot" />
-              <span className="font-mono text-[11px] tracking-[0.1em] uppercase">
-                Available for work
-              </span>
+              <span className="font-mono text-[11px] tracking-[0.1em] uppercase">Available for work</span>
             </div>
-            <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">
-              Web Design
-            </span>
-            <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">
-              Web Development
-            </span>
-            <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">
-              Based in Pune, India.
-            </span>
+            <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">Web Design</span>
+            <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">Web Development</span>
+            <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">Based in Pune, India.</span>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div
-        ref={scrollRef}
-        className="flex flex-col items-center gap-2 scroll-indicator py-6"
-        style={{ opacity: 0 }}
-      >
-        <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--text-muted)]">
-          Scroll
-        </span>
-        <svg
-          width="16"
-          height="24"
-          viewBox="0 0 16 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          style={{ color: 'var(--text-muted)' }}
-        >
+      {/* Scroll indicator */}
+      <div ref={scrollRef} className="flex flex-col items-center gap-2 scroll-indicator py-6" style={{ opacity: 0 }}>
+        <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--text-muted)]">Scroll</span>
+        <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: 'var(--text-muted)' }}>
           <path d="M8 4 L8 20 M3 15 L8 20 L13 15" />
         </svg>
-      </div>
-
-      {/* ── Futuristic Showreel: The Nexus Carousel ── */}
-      <div ref={reelSectionRef} className="nexus-section">
-        {/* Smoke Animation Background */}
-        <div className="smoke-container">
-          <div className="smoke-particle p1" />
-          <div className="smoke-particle p2" />
-          <div className="smoke-particle p3" />
-        </div>
-
-        <div className="nexus-container">
-          <div className="nexus-grid" ref={nexusGridRef}>
-            {[1, 2, 3, 4].map((id) => (
-              <div key={id} className={`nexus-card card-${id}`}>
-                <div className="nexus-card-inner">
-                  {/* Holographic Overlay */}
-                  <div className="nexus-hologram" />
-
-                  {/* Video Content */}
-                  <video
-                    src="/showreel.mp4"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="nexus-video"
-                    style={{ filter: `hue-rotate(${id * 45}deg)` }}
-                  />
-
-                  {/* UI Elements */}
-                  <div className="nexus-ui">
-                    <div className="nexus-ui-top">
-                      <span className="font-mono text-[9px]">PROJECT_DATA_{id}</span>
-                      <div className="nexus-ui-dot" />
-                    </div>
-                    <div className="nexus-ui-bottom">
-                      <span className="nexus-ui-title">MODULE 0{id}</span>
-                      <div className="nexus-ui-bar" />
-                    </div>
-                  </div>
-
-                  {/* Scanner Line */}
-                  <div className="nexus-scanner" />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Center Info / Control */}
-          <div className="nexus-center">
-            <div className="nexus-center-ring" />
-            <div className="flex flex-col items-center gap-2">
-              <span className="nexus-label">Nexus Reel</span>
-              <span className="font-mono text-[10px] text-white/40 tracking-[0.3em] uppercase">
-                Interactive Multi-view
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

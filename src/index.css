@@ -194,13 +194,16 @@ img {
   max-width: 480px;
   max-height: 560px;
   position: relative;
-  z-index: 1;
+  z-index: 10;
+  transition: transform 0.1s linear;
+  will-change: width, height, max-width, max-height;
 }
 
 .hero-3d-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 1; /* Square as per the marked dimensions */
+  aspect-ratio: 1;
+  /* Square as per the marked dimensions */
   background: rgba(205, 184, 184, 0.03);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -209,12 +212,14 @@ img {
     0 10px 20px rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   transform: rotateY(-15deg) rotateX(8deg);
+  will-change: transform, width, height, position, top, left, border-radius;
   transition: transform 0.2s ease-out, box-shadow 0.3s ease;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   user-select: none;
+  z-index: 5;
 }
 
 .hero-3d-card:hover {
@@ -227,10 +232,10 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 10%;
+  object-position: center 20%;
   /* Match the whitespace at the top as per marked dimensions */
   border-radius: 16px;
-  transition: transform 0.6s var(--ease-out);
+  transition: transform 0.6s var(--ease-out), border-radius 0.6s var(--ease);
 }
 
 .hero-3d-glow {
@@ -272,6 +277,34 @@ img {
   padding-top: var(--section-pad);
   padding-bottom: clamp(20px, 3vw, 40px);
 }
+
+#about {
+  position: relative;
+  z-index: 60;
+  /* above the fixed overlay at z-index: 50 */
+  background-color: transparent !important;
+  color: #ffffff;
+}
+
+/* All text inside About should be white when overlaid on the image */
+#about .section-label,
+#about p,
+#about span,
+#about h2,
+#about h3 {
+  color: #ffffff !important;
+}
+
+/* Stats numbers in about also white */
+#about .font-display {
+  color: #ffffff !important;
+}
+
+/* Divider line in about — make it subtly visible on dark image */
+#about .divider {
+  background: rgba(255, 255, 255, 0.2);
+}
+
 
 .divider {
   width: 100%;
@@ -329,14 +362,47 @@ img {
   animation: smoke-float 20s ease-in-out infinite;
 }
 
-.p1 { width: 600px; height: 600px; background: var(--accent); top: -10%; left: -10%; animation-delay: 0s; }
-.p2 { width: 500px; height: 500px; background: #fff; bottom: -10%; right: -10%; animation-delay: -5s; }
-.p3 { width: 400px; height: 400px; background: var(--accent); top: 40%; left: 40%; animation-delay: -10s; }
+.p1 {
+  width: 600px;
+  height: 600px;
+  background: var(--accent);
+  top: -10%;
+  left: -10%;
+  animation-delay: 0s;
+}
+
+.p2 {
+  width: 500px;
+  height: 500px;
+  background: #fff;
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+.p3 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent);
+  top: 40%;
+  left: 40%;
+  animation-delay: -10s;
+}
 
 @keyframes smoke-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(100px, 50px) scale(1.1); }
-  66% { transform: translate(-50px, 100px) scale(0.9); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(100px, 50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-50px, 100px) scale(0.9);
+  }
 }
 
 .nexus-container {
@@ -461,8 +527,13 @@ img {
 }
 
 @keyframes scanner-move {
-  0% { top: 0%; }
-  100% { top: 100%; }
+  0% {
+    top: 0%;
+  }
+
+  100% {
+    top: 100%;
+  }
 }
 
 .nexus-center {
@@ -497,15 +568,33 @@ img {
 }
 
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 768px) {
-  .nexus-grid { grid-template-columns: 1fr; transform: rotateX(10deg); }
-  .nexus-section { padding: 80px 0; }
-  .nexus-label { font-size: 32px; }
-  .nexus-center-ring { width: 240px; height: 240px; }
+  .nexus-grid {
+    grid-template-columns: 1fr;
+    transform: rotateX(10deg);
+  }
+
+  .nexus-section {
+    padding: 80px 0;
+  }
+
+  .nexus-label {
+    font-size: 32px;
+  }
+
+  .nexus-center-ring {
+    width: 240px;
+    height: 240px;
+  }
 }
 
 /* ── Marquee ────────────────────────────────────── */
