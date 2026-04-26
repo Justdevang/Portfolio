@@ -65,8 +65,8 @@ const Hero = ({ isReady }) => {
         const rect = cardRef.current?.getBoundingClientRect();
         if (!rect || !fixedOverlayRef.current) return;
         gsap.set(fixedOverlayRef.current, {
-          top: rect.top,
-          left: rect.left,
+          x: rect.left,
+          y: rect.top,
           width: rect.width,
           height: rect.height,
           borderRadius: 20,
@@ -76,14 +76,6 @@ const Hero = ({ isReady }) => {
       syncOverlayToCard();
 
       // ─── Master scrubbed timeline (pin = 200vh) ───
-      //
-      // Progress map:
-      //   0.00 → 0.20  Hero text/info exits, card fades out
-      //   0.05 → 0.15  Fixed overlay fades in (seamless card→overlay swap)
-      //   0.10 → 0.60  Overlay expands card rect → 100vw/100vh
-      //   0.60 → 0.78  Dark scrim fades in
-      //   0.78 → 1.00  About content reveals staggered
-      //
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -107,7 +99,7 @@ const Hero = ({ isReady }) => {
         // Fixed overlay swap
         .to(fixedOverlayRef.current, { opacity: 1, duration: 0.15 }, 0.05)
         .to(fixedOverlayRef.current, {
-          top: 0, left: 0,
+          x: 0, y: 0,
           width: '100vw', height: '100vh',
           borderRadius: 0,
           duration: 0.5,
@@ -195,16 +187,20 @@ const Hero = ({ isReady }) => {
         ref={fixedOverlayRef}
         style={{
           position: 'fixed',
+          top: 0,
+          left: 0,
           overflow: 'hidden',
           zIndex: 50,
           pointerEvents: 'none',
           opacity: 0,
-          willChange: 'top, left, width, height, border-radius, opacity',
+          willChange: 'transform, width, height, border-radius, opacity',
         }}
       >
         <img
           src="/images/Untitled (15).png"
           alt="Digital Experience"
+          fetchpriority="high"
+          decoding="async"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
         />
         <div
@@ -259,6 +255,8 @@ const Hero = ({ isReady }) => {
                 src="/images/Untitled (15).png"
                 alt="Digital Experience"
                 className="hero-3d-image"
+                fetchpriority="high"
+                decoding="async"
               />
               <div className="hero-3d-glow" />
             </div>

@@ -131,6 +131,7 @@ const Capabilities = () => {
                           alt={cap.title}
                           className="w-full h-auto block"
                           loading="lazy"
+                          decoding="async"
                           onError={(e) => {
                             e.target.style.display = 'none';
                           }}

@@ -11,6 +11,7 @@ import Capabilities from './components/Capabilities';
 import SelectedWork from './components/SelectedWork';
 import Process from './components/Process';
 import StudioLife from './components/StudioLife';
+import GithubRepos from './components/GithubRepos';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import './index.css';
@@ -45,6 +46,7 @@ const App = () => {
         <About />
         <Capabilities />
         <SelectedWork />
+        <GithubRepos />
         <Process />
         <StudioLife />
         <CTA />
