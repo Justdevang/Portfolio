@@ -188,6 +188,71 @@ img {
   opacity: 0.08;
 }
 
+/* ── Hero 3D Image ────────────────────────────── */
+.hero-3d-container {
+  width: 100%;
+  max-width: 480px;
+  max-height: 560px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-3d-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1; /* Square as per the marked dimensions */
+  background: rgba(205, 184, 184, 0.03);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.2),
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: rotateY(-15deg) rotateX(8deg);
+  transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.hero-3d-card:hover {
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.3),
+    0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.hero-3d-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 10%;
+  /* Match the whitespace at the top as per marked dimensions */
+  border-radius: 16px;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.hero-3d-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle, rgba(200, 169, 110, 0.15) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-3d-container:hover .hero-3d-card {
+  transform: rotateY(-5deg) rotateX(2deg) scale(1.02);
+}
+
+.hero-3d-container:hover .hero-3d-image {
+  transform: scale(1.05);
+}
+
 /* ── Layout ─────────────────────────────────────── */
 
 .container {
@@ -239,72 +304,208 @@ img {
   }
 }
 
-/* ── Showreel / Reel ────────────────────────────── */
-
-.reel-section {
-  width: 100%;
-  padding: 0;
-}
-
-.reel-container {
+/* ── Nexus Carousel & Smoke ──────────────────────── */
+.nexus-section {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  max-height: 80vh;
-  background-color: var(--bg-dark);
+  padding: 120px 0;
+  background: var(--bg-dark);
   overflow: hidden;
-  border-radius: 12px;
-  /* Replaced clip-path with transform for better performance */
-  transform: scale(0.6) translateZ(0);
-  will-change: transform;
+  perspective: 2000px;
 }
 
-.reel-video {
+.smoke-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.smoke-particle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: smoke-float 20s ease-in-out infinite;
+}
+
+.p1 { width: 600px; height: 600px; background: var(--accent); top: -10%; left: -10%; animation-delay: 0s; }
+.p2 { width: 500px; height: 500px; background: #fff; bottom: -10%; right: -10%; animation-delay: -5s; }
+.p3 { width: 400px; height: 400px; background: var(--accent); top: 40%; left: 40%; animation-delay: -10s; }
+
+@keyframes smoke-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(100px, 50px) scale(1.1); }
+  66% { transform: translate(-50px, 100px) scale(0.9); }
+}
+
+.nexus-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.nexus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  transform: rotateX(20deg) rotateZ(-5deg);
+  transform-style: preserve-3d;
+}
+
+.nexus-card {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.6s var(--ease-out);
+  transform-style: preserve-3d;
+}
+
+.nexus-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.nexus-card:hover {
+  transform: translateZ(50px) scale(1.05);
+  border-color: var(--accent);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(200, 169, 110, 0.2);
+}
+
+.nexus-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-}
-
-.reel-overlay {
-  position: absolute;
-  bottom: 24px;
-  left: 32px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
   opacity: 0.6;
-  transition: opacity 0.3s var(--ease);
+  transition: opacity 0.6s var(--ease);
 }
 
-.reel-overlay:hover {
+.nexus-card:hover .nexus-video {
+  opacity: 0.9;
+}
+
+.nexus-hologram {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(200, 169, 110, 0.1) 0%, transparent 50%, rgba(200, 169, 110, 0.05) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.nexus-ui {
+  position: absolute;
+  inset: 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 3;
+  color: #fff;
+  pointer-events: none;
+}
+
+.nexus-ui-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nexus-ui-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.nexus-ui-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.nexus-ui-bar {
+  width: 40px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 8px;
+  transition: width 0.6s var(--ease-out);
+}
+
+.nexus-card:hover .nexus-ui-bar {
+  width: 100%;
+}
+
+.nexus-scanner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  box-shadow: 0 0 15px var(--accent);
+  opacity: 0;
+  z-index: 4;
+}
+
+.nexus-card:hover .nexus-scanner {
+  animation: scanner-move 2s linear infinite;
   opacity: 1;
 }
 
-.reel-play-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.2);
+@keyframes scanner-move {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+.nexus-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(100px);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  transition: all 0.3s var(--ease);
-  cursor: none;
+  z-index: 10;
+  pointer-events: none;
 }
 
-.reel-play-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.6);
+.nexus-center-ring {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: rotate 20s linear infinite;
 }
 
-.reel-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.15em;
+.nexus-label {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .nexus-grid { grid-template-columns: 1fr; transform: rotateX(10deg); }
+  .nexus-section { padding: 80px 0; }
+  .nexus-label { font-size: 32px; }
+  .nexus-center-ring { width: 240px; height: 240px; }
 }
 
 /* ── Marquee ────────────────────────────────────── */
