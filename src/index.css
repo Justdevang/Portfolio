@@ -213,7 +213,7 @@ img {
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   transform: rotateY(-15deg) rotateX(8deg);
   will-change: transform, width, height, position, top, left, border-radius;
-  transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+  /* NO CSS transition — GSAP owns all transforms to prevent fighting */
   overflow: hidden;
   display: flex;
   align-items: center;

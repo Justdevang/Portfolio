@@ -11,6 +11,7 @@ const Hero = ({ isReady }) => {
   const scrollRef = useRef(null);
   const cardRef = useRef(null);
   const fixedOverlayRef = useRef(null);
+  const floatTweenRef = useRef(null);
   const [timeCode, setTimeCode] = useState('00:00:00:00');
 
   useEffect(() => {
@@ -30,16 +31,9 @@ const Hero = ({ isReady }) => {
     }, 40);
 
     // ─── CRITICAL: Select About elements BEFORE entering gsap.context ───
-    // gsap.context(fn, scopeEl) scopes ALL selectors inside fn to scopeEl.
-    // Since About elements live outside sectionRef (the Hero), any
-    // document.querySelectorAll('.about-reveal') inside the context would
-    // silently return nothing. We grab them here, in global scope.
     const aboutContent = document.querySelector('.about-overlay-content');
     const aboutReveals = gsap.utils.toArray('.about-reveal');
     const aboutLine = document.querySelector('.about-line');
-
-    // These are already hidden via inline style in About.jsx (opacity:0, translateY:60px).
-    // No gsap.set() needed — the DOM itself is the source of truth for initial state.
 
     const ctx = gsap.context(() => {
       ScrollTrigger.refresh();
@@ -60,16 +54,27 @@ const Hero = ({ isReady }) => {
         scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: '+=150', scrub: true },
       });
 
-      // ─── Sync fixed overlay to card position ───
+      // ─── Idle float — stored so we can kill it precisely before scroll takes over ───
+      floatTweenRef.current = gsap.to(cardRef.current, {
+        y: -18,
+        duration: 3,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
+
+      // ─── Sync fixed overlay to card — reads layout ONCE, no jank ───
       const syncOverlayToCard = () => {
         const rect = cardRef.current?.getBoundingClientRect();
         if (!rect || !fixedOverlayRef.current) return;
+        // Reset any GSAP-applied y from the float before reading rect
         gsap.set(fixedOverlayRef.current, {
           x: rect.left,
           y: rect.top,
           width: rect.width,
           height: rect.height,
           borderRadius: 20,
+          scale: 1,
           opacity: 0,
         });
       };
@@ -81,47 +86,69 @@ const Hero = ({ isReady }) => {
           trigger: sectionRef.current,
           start: 'top top',
           end: '+=200%',
-          scrub: 1.2,
+          scrub: 0.6,          // tighter scrub = no lag between scroll and image
           pin: true,
           anticipatePin: 1,
-          onUpdate: (self) => {
-            if (self.progress < 0.01) syncOverlayToCard();
+          onEnter: () => {
+            // Kill idle float the instant scroll begins — prevents competing tweens
+            floatTweenRef.current?.kill();
+            gsap.set(cardRef.current, { y: 0 }); // snap to neutral
+            syncOverlayToCard();
+          },
+          onLeaveBack: () => {
+            // Restore float when scrolling back to top
+            gsap.set(cardRef.current, { y: 0 });
+            floatTweenRef.current = gsap.to(cardRef.current, {
+              y: -18,
+              duration: 3,
+              ease: 'sine.inOut',
+              repeat: -1,
+              yoyo: true,
+            });
           },
         },
       });
 
       tl
-        // Hero exits
-        .to(headingRef.current, { opacity: 0, y: -60, duration: 0.3 }, 0)
-        .to(infoRef.current, { opacity: 0, x: 80, duration: 0.3 }, 0)
-        .to(cardRef.current, { opacity: 0, duration: 0.15 }, 0)
+        // — 0.00: Hero text exits
+        .to(headingRef.current, { opacity: 0, y: -50, duration: 0.25 }, 0)
+        .to(infoRef.current,    { opacity: 0, x: 60, duration: 0.25 }, 0)
 
-        // Fixed overlay swap
-        .to(fixedOverlayRef.current, { opacity: 1, duration: 0.15 }, 0.05)
+        // — 0.02: Card winks out; overlay appears pixel-perfect in its place
+        .to(cardRef.current,        { opacity: 0, duration: 0.08 }, 0.02)
+        .to(fixedOverlayRef.current, { opacity: 1, duration: 0.08 }, 0.02)
+
+        // — 0.08: Portal burst — scale up from center with expo ease, no border-radius yet
+        .to(fixedOverlayRef.current, {
+          scale: 1.06,
+          duration: 0.08,
+          ease: 'expo.out',
+        }, 0.08)
+
+        // — 0.14: Expand to full screen, collapse border-radius, scale snaps back
         .to(fixedOverlayRef.current, {
           x: 0, y: 0,
           width: '100vw', height: '100vh',
           borderRadius: 0,
-          duration: 0.5,
-          ease: 'power2.inOut',
-        }, 0.1)
+          scale: 1,
+          duration: 0.42,
+          ease: 'expo.inOut',
+        }, 0.14)
 
-        // Dark scrim
+        // — 0.60: Dark scrim fades in over image
         .to('.hero-bg-dark-overlay', {
           opacity: 1,
-          duration: 0.25,
+          duration: 0.22,
           ease: 'power2.inOut',
-        }, 0.60)
+        }, 0.58)
 
-        // ── About reveals (using pre-grabbed DOM refs, NOT string selectors) ──
-        // aboutContent, aboutReveals, aboutLine were captured above the context
-        // so they correctly reference the About section's DOM elements.
+        // — 0.78: About content reveals
         .to(aboutContent, {
           opacity: 1,
           y: 0,
           duration: 0.22,
           ease: 'power2.out',
-        }, 0.78)
+        }, 0.76)
         .to(aboutReveals, {
           opacity: 1,
           y: 0,
@@ -135,7 +162,7 @@ const Hero = ({ isReady }) => {
           ease: 'power2.out',
         }, 0.88);
 
-      // ─── Phase 4: Retire overlay once About scrolls past ───
+      // ─── Retire overlay once About scrolls past ───
       ScrollTrigger.create({
         trigger: '#about',
         start: 'bottom bottom',
@@ -149,16 +176,7 @@ const Hero = ({ isReady }) => {
         },
       });
 
-      // Idle float on card
-      gsap.to(cardRef.current, {
-        y: -20,
-        duration: 3,
-        ease: 'power1.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
-
-    }, sectionRef); // <-- context scoped to Hero only
+    }, sectionRef);
 
     return () => {
       ctx.revert();
@@ -203,6 +221,7 @@ const Hero = ({ isReady }) => {
           decoding="async"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
         />
+
         <div
           className="hero-bg-dark-overlay"
           style={{
@@ -280,7 +299,7 @@ const Hero = ({ isReady }) => {
 
       {/* Scroll indicator */}
       <div ref={scrollRef} className="flex flex-col items-center gap-2 scroll-indicator py-6" style={{ opacity: 0 }}>
-        <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--text-muted)]">Scroll</span>
+        <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--text-muted)]">{timeCode}</span>
         <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: 'var(--text-muted)' }}>
           <path d="M8 4 L8 20 M3 15 L8 20 L13 15" />
         </svg>
