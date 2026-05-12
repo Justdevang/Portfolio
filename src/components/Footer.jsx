@@ -11,7 +11,7 @@ const Footer = () => {
   const daysText = days.map((d) => `${d} · `).join('');
 
   const socials = [
-    { label: 'Instagram', href: 'https://www.instagram.com/_automatewithdev/' },
+    { label: 'Instagram', href: 'https://www.instagram.com/codev_ai/' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/devang-dhakate/' },
     { label: 'GitHub', href: 'https://github.com/Justdevang' },
   ];
