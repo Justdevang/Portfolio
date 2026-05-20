@@ -40,12 +40,12 @@ const About = () => {
           className="about-reveal"
           style={{ marginBottom: 'clamp(24px, 5dvh, 48px)', opacity: 0, transform: 'translateY(30px)' }}
         >
-          <span
+          <h2
             className="section-label"
-            style={{ color: 'rgba(255,255,255,0.5)', fontSize: '10px', letterSpacing: '0.15em' }}
+            style={{ color: 'rgba(255,255,255,0.5)', fontSize: '10px', letterSpacing: '0.15em', display: 'inline-block' }}
           >
             ( about me )
-          </span>
+          </h2>
         </div>
 
         <div

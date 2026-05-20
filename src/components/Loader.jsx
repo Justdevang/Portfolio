@@ -70,12 +70,12 @@ const Loader = ({ onComplete }) => {
       ref={loaderRef} 
       className="fixed inset-0 z-[10000] bg-[#f4f1ec] flex items-center justify-center overflow-hidden"
     >
-      <h1 
+      <div 
         ref={textRef} 
         className="font-display font-bold text-[clamp(24px,5vw,64px)] tracking-tighter uppercase flex gap-[0.3em]"
       >
         {/* Words will be injected here */}
-      </h1>
+      </div>
       
       {/* Progress line at bottom */}
       <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--border)] overflow-hidden">
