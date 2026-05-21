@@ -7,10 +7,10 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     number: '01',
-    name: 'Learnpath',
+    name: 'Roadmaptic',
     tags: ['PRODUCT DESIGN', 'WEB DEVELOPMENT'],
-    image: '/images/learnpath-hover-image.png',
-    url: '#',
+    image: '/images/roadmaptic-hover-image.png',
+    url: 'https://roadmaptic.qzz.io',
   },
   {
     number: '02',
