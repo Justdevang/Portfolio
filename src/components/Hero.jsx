@@ -10,7 +10,6 @@ const Hero = ({ isReady }) => {
   const infoRef = useRef(null);
   const scrollRef = useRef(null);
   const cardRef = useRef(null);
-  const fixedOverlayRef = useRef(null);
   const floatTweenRef = useRef(null);
   const [timeCode, setTimeCode] = useState('00:00:00:00');
 
@@ -30,10 +29,13 @@ const Hero = ({ isReady }) => {
       );
     }, 40);
 
-    // ─── CRITICAL: Select About elements BEFORE entering gsap.context ───
+    // ─── CRITICAL: Select elements BEFORE entering gsap.context (scoped to #home) ───
+    const aboutSection = document.getElementById('about');
     const aboutContent = document.querySelector('.about-overlay-content');
     const aboutReveals = gsap.utils.toArray('.about-reveal');
     const aboutLine = document.querySelector('.about-line');
+    const fixedOverlay = document.getElementById('hero-fixed-overlay');
+    const darkOverlay = fixedOverlay?.querySelector('.hero-bg-dark-overlay');
 
     const ctx = gsap.context(() => {
       ScrollTrigger.refresh();
@@ -66,9 +68,9 @@ const Hero = ({ isReady }) => {
       // ─── Sync fixed overlay to card — reads layout ONCE, no jank ───
       const syncOverlayToCard = () => {
         const rect = cardRef.current?.getBoundingClientRect();
-        if (!rect || !fixedOverlayRef.current) return;
+        if (!rect || !fixedOverlay) return;
         // Reset any GSAP-applied y from the float before reading rect
-        gsap.set(fixedOverlayRef.current, {
+        gsap.set(fixedOverlay, {
           x: rect.left,
           y: rect.top,
           width: rect.width,
@@ -115,18 +117,18 @@ const Hero = ({ isReady }) => {
         .to(infoRef.current,    { opacity: 0, x: 60, duration: 0.25 }, 0)
 
         // — 0.02: Card winks out; overlay appears pixel-perfect in its place
-        .to(cardRef.current,        { opacity: 0, duration: 0.08 }, 0.02)
-        .to(fixedOverlayRef.current, { opacity: 1, duration: 0.08 }, 0.02)
+        .to(cardRef.current, { opacity: 0, duration: 0.08 }, 0.02)
+        .to(fixedOverlay,    { opacity: 1, duration: 0.08 }, 0.02)
 
         // — 0.08: Portal burst — scale up from center with expo ease, no border-radius yet
-        .to(fixedOverlayRef.current, {
+        .to(fixedOverlay, {
           scale: 1.06,
           duration: 0.08,
           ease: 'expo.out',
         }, 0.08)
 
         // — 0.14: Expand to full screen, collapse border-radius, scale snaps back
-        .to(fixedOverlayRef.current, {
+        .to(fixedOverlay, {
           x: 0, y: 0,
           width: '100vw', height: '100vh',
           borderRadius: 0,
@@ -136,7 +138,7 @@ const Hero = ({ isReady }) => {
         }, 0.14)
 
         // — 0.60: Dark scrim fades in over image
-        .to('.hero-bg-dark-overlay', {
+        .to(darkOverlay, {
           opacity: 1,
           duration: 0.22,
           ease: 'power2.inOut',
@@ -164,15 +166,15 @@ const Hero = ({ isReady }) => {
 
       // ─── Retire overlay once About scrolls past ───
       ScrollTrigger.create({
-        trigger: '#about',
+        trigger: aboutSection,
         start: 'bottom bottom',
         onEnter: () => {
-          gsap.to(fixedOverlayRef.current, { opacity: 0, duration: 0.7, ease: 'power2.inOut' });
-          gsap.to('.hero-bg-dark-overlay', { opacity: 0, duration: 0.4 });
+          gsap.to(fixedOverlay, { opacity: 0, duration: 0.7, ease: 'power2.inOut' });
+          gsap.to(darkOverlay, { opacity: 0, duration: 0.4 });
         },
         onLeaveBack: () => {
-          gsap.to(fixedOverlayRef.current, { opacity: 1, duration: 0.4 });
-          gsap.to('.hero-bg-dark-overlay', { opacity: 1, duration: 0.3 });
+          gsap.to(fixedOverlay, { opacity: 1, duration: 0.4 });
+          gsap.to(darkOverlay, { opacity: 1, duration: 0.3 });
         },
       });
 
@@ -199,41 +201,6 @@ const Hero = ({ isReady }) => {
 
   return (
     <section id="home" ref={sectionRef} className="relative flex flex-col">
-
-      {/* Fixed fullscreen overlay */}
-      <div
-        ref={fixedOverlayRef}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          overflow: 'hidden',
-          zIndex: 50,
-          pointerEvents: 'none',
-          opacity: 0,
-          willChange: 'transform, width, height, border-radius, opacity',
-        }}
-      >
-        <img
-          src="/images/Untitled (15).png"
-          alt="Digital Experience"
-          fetchpriority="high"
-          decoding="async"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
-        />
-
-        <div
-          className="hero-bg-dark-overlay"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'rgba(0,0,0,0.52)',
-            opacity: 0,
-            zIndex: 2,
-            pointerEvents: 'none',
-          }}
-        />
-      </div>
 
       {/* Hero layout */}
       <div

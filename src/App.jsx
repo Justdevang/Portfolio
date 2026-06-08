@@ -37,6 +37,41 @@ const App = () => {
 
   return (
     <>
+      <div
+        id="hero-fixed-overlay"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: 0,
+          height: 0,
+          overflow: 'hidden',
+          zIndex: 50,
+          pointerEvents: 'none',
+          opacity: 0,
+          willChange: 'transform, width, height, border-radius, opacity',
+        }}
+      >
+        <img
+          src="/images/Untitled (15).png"
+          alt="Digital Experience"
+          fetchPriority="high"
+          decoding="async"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
+        />
+        <div
+          className="hero-bg-dark-overlay"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'rgba(0,0,0,0.52)',
+            opacity: 0,
+            zIndex: 2,
+            pointerEvents: 'none',
+          }}
+        />
+      </div>
+
       <CustomCursor />
       {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
       <Navbar />
