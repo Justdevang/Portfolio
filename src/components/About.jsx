@@ -8,9 +8,9 @@ const About = () => {
   const sectionRef = useRef(null);
 
   const stats = [
-    { number: '1+', label: 'Years Experience' },
-    { number: '3+', label: 'Projects Delivered' },
-    { number: '100%', label: 'Client Satisfaction' },
+    { number: '5+', label: 'Products Built' },
+    { number: '3+', label: 'Years Experience' },
+    { number: 'Pune, IN', label: 'Base Location' },
   ];
 
   return (
@@ -66,8 +66,8 @@ const About = () => {
                 lineHeight: 1.8,
               }}
             >
-              The Solo Developer ·<br />
-              Working Globally ·<br />
+              Full-Stack Architect ·<br />
+              Creative Technologist ·<br />
               Based in Pune.
             </p>
           </div>
@@ -79,17 +79,14 @@ const About = () => {
             <p
               className="font-display"
               style={{
-                fontSize: 'clamp(18px, 4vw, 34px)',
-                fontWeight: 500,
-                lineHeight: 1.3,
+                fontSize: 'clamp(18px, 4vw, 32px)',
+                fontWeight: 400,
+                lineHeight: 1.4,
                 letterSpacing: '-0.01em',
                 color: '#ffffff',
               }}
             >
-              I build websites (mostly) and brand identities (definitely).
-              I spend 70% of my time perfecting layouts and the other 30%
-              making sure they move like a dream. Basically, I build the
-              digital stage so your brand can finally perform.
+              I'm Devang, a full-stack developer based in Pune, India. I build end-to-end: e-commerce platforms with real payments and logistics, interactive 3D web experiences, and the occasional native app. I care about the details that make a product actually work in production: security, performance, and the messy integrations most people skip. Currently moving toward full-time and freelance full-stack work.
             </p>
           </div>
         </div>
@@ -134,7 +131,7 @@ const About = () => {
                   color: 'rgba(255,255,255,0.45)',
                 }}
               >
-                {stat.label.split(' ')[0]}
+                {stat.label}
               </span>
             </div>
           ))}

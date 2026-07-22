@@ -17,7 +17,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative overflow-hidden" style={{ borderTop: '1px solid var(--border)' }}>
+    <footer className="relative overflow-hidden" style={{ borderTop: '1px solid var(--border)', backgroundColor: 'var(--bg)', zIndex: 60 }}>
       {/* Days Easter Egg — Background */}
       <div
         className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none"

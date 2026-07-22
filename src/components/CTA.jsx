@@ -71,23 +71,33 @@ const CTA = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Left Side: Text */}
+          {/* Left Side: Text & Quick Links */}
           <div className="cta-reveal flex flex-col gap-8">
             <h2 className="heading-lg">
-              If you&rsquo;d like to make an enquiry, please feel free to get in touch, and I will respond as soon as possible.
+              Open to full-time and freelance full-stack development roles.
             </h2>
+            <p className="body-lg text-[var(--text-muted)] max-w-md">
+              Whether you need a high-conversion e-commerce engine, an interactive 3D web experience, or are looking to hire a dedicated full-stack engineer based in Pune, let&rsquo;s start a conversation.
+            </p>
 
             <div className="flex flex-col gap-4">
-              <p className="body-lg">
-                If you prefer to contact me directly, send your Email to:
-              </p>
-              <a
-                href="mailto:devangdhakate22@gmail.com"
-                className="font-mono text-[clamp(14px,1.5vw,20px)] tracking-[0.02em] text-[var(--text)] hover:text-[var(--text-muted)] transition-colors duration-300 underline underline-offset-8"
-                id="cta-email"
-              >
-                devangdhakate22@gmail.com
-              </a>
+              <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-[var(--text-muted)]">
+                Direct Channels
+              </span>
+              <ul className="flex flex-col gap-3 p-0 m-0 list-none font-mono text-[13px] tracking-[0.05em] text-[var(--text-muted)]">
+                <li>
+                  EMAIL: <a href="mailto:devangdhakate22@gmail.com" className="text-[var(--text)] underline underline-offset-4 hover:text-[var(--text-muted)] transition-colors duration-300">devangdhakate22@gmail.com</a>
+                </li>
+                <li>
+                  LINKEDIN: <a href="https://www.linkedin.com/in/devang-dhakate/" target="_blank" rel="noopener noreferrer" className="text-[var(--text)] underline underline-offset-4 hover:text-[var(--text-muted)] transition-colors duration-300">linkedin.com/in/devang-dhakate</a>
+                </li>
+                <li>
+                  GITHUB: <a href="https://github.com/Justdevang" target="_blank" rel="noopener noreferrer" className="text-[var(--text)] underline underline-offset-4 hover:text-[var(--text-muted)] transition-colors duration-300">github.com/Justdevang</a>
+                </li>
+                <li>
+                  RESUME: <a href="/Devang_Dhakate_Resume.pdf" download="Devang_Dhakate_Resume.pdf" className="text-[var(--text)] font-bold underline underline-offset-4 hover:text-[var(--text-muted)] transition-colors duration-300">Download CV/Resume &darr;</a>
+                </li>
+              </ul>
             </div>
           </div>
 

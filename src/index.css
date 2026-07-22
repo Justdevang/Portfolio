@@ -274,6 +274,8 @@ img {
 }
 
 .section {
+  position: relative;
+  z-index: 60;
   padding-top: var(--section-pad);
   padding-bottom: clamp(20px, 3vw, 40px);
 }
@@ -1027,4 +1029,38 @@ img {
   100% {
     transform: scaleX(1);
   }
+}
+
+/* ── Custom Portfolio Redesign Buttons ──────────── */
+
+.btn-primary {
+  background-color: var(--text) !important;
+  color: var(--bg) !important;
+  border: 1px solid var(--text) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-secondary {
+  background-color: transparent !important;
+  color: var(--text) !important;
+  border: 1px solid var(--text) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-secondary:hover {
+  background-color: var(--text) !important;
+  color: var(--bg) !important;
+  transform: translateY(-2px);
 }
