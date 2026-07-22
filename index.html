@@ -223,6 +223,262 @@
       </div>
       <div class="fallback-loader-text">Waking up server...</div>
     </div>
+
+    <!-- Noscript Overrides & Styles for JS-Disabled Browsers & Scrapers -->
+    <noscript>
+      <style>
+        .fallback-loader-container {
+          display: none !important;
+        }
+        body {
+          background-color: #F4F1EC;
+          color: #0D0D0D;
+          font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          margin: 0;
+          padding: 2rem 1rem;
+          line-height: 1.6;
+        }
+        .fallback-wrapper {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        header {
+          border-bottom: 1px solid rgba(13, 13, 13, 0.1);
+          padding-bottom: 1rem;
+          margin-bottom: 2rem;
+        }
+        nav {
+          display: flex;
+          gap: 1.5rem;
+          font-family: 'Space Mono', monospace;
+          font-size: 12px;
+        }
+        a {
+          color: #0D0D0D;
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+        a:hover {
+          color: #6B6560;
+        }
+        h1 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          line-height: 1.2;
+          margin-bottom: 1.5rem;
+        }
+        h2 {
+          font-size: 1.8rem;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          margin-top: 3rem;
+          margin-bottom: 1rem;
+          border-bottom: 1px solid rgba(13, 13, 13, 0.1);
+          padding-bottom: 0.5rem;
+        }
+        h3 {
+          font-size: 1.3rem;
+          margin-top: 2rem;
+          margin-bottom: 0.5rem;
+        }
+        section {
+          margin-bottom: 3rem;
+        }
+        .meta-info {
+          font-family: 'Space Mono', monospace;
+          font-size: 11px;
+          color: #6B6560;
+          text-transform: uppercase;
+          margin-bottom: 1.5rem;
+        }
+        ul, dl {
+          padding-left: 1.2rem;
+        }
+        li {
+          margin-bottom: 0.5rem;
+        }
+        dt {
+          font-weight: bold;
+          margin-top: 1rem;
+        }
+        dd {
+          margin-left: 0;
+          margin-bottom: 1rem;
+          color: #4A4540;
+        }
+        .project-meta {
+          font-size: 0.9rem;
+          color: #555;
+          margin-bottom: 0.8rem;
+        }
+        .project-meta strong {
+          color: #0D0D0D;
+        }
+      </style>
+    </noscript>
+
+    <!-- Semantic HTML Fallback for SEO Crawlers, AI Scrapers, and Fetch Tools -->
+    <div class="fallback-wrapper">
+      <header>
+        <nav>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+      
+      <main>
+        <section id="home">
+          <h1>I build full-stack products from e-commerce to interactive web experiences.</h1>
+          <div class="meta-info">
+            Status: Available for work &bull; Based in Pune, India
+          </div>
+          <p>Focus Areas: Web Design &middot; Web Development &middot; Creative Technology</p>
+          <p>
+            <a href="#work">View Case Studies</a> &middot; 
+            <a href="/Devang_Dhakate_Resume.pdf">Download Resume CV</a>
+          </p>
+        </section>
+
+        <section id="about">
+          <h2>About Me</h2>
+          <div class="meta-info">Full-Stack Architect &middot; Creative Technologist</div>
+          <p>I'm Devang, a full-stack developer based in Pune, India. I build end-to-end: e-commerce platforms with real payments and logistics, interactive 3D web experiences, and the occasional native app. I care about the details that make a product actually work in production: security, performance, and the messy integrations most people skip. Currently moving toward full-time and freelance full-stack work.</p>
+          <ul>
+            <li><strong>5+</strong> Products Built</li>
+            <li><strong>3+</strong> Years Experience</li>
+            <li><strong>Pune, IN</strong> Base Location</li>
+          </ul>
+        </section>
+
+        <section id="work">
+          <h2>Selected Work</h2>
+          
+          <article>
+            <h3>01. Morivaná Daily</h3>
+            <div class="project-meta">
+              <strong>URL:</strong> <a href="https://morivanadaily.com" target="_blank" rel="noopener noreferrer">morivanadaily.com</a> &middot; 
+              <strong>Stack:</strong> React, Node.js, Express, MongoDB, Clerk Auth, Razorpay, Stripe, Delhivery API, Cloudflare Pages, Meta Pixel/CAPI
+            </div>
+            <p><strong>Problem:</strong> An e-commerce wellness brand needed a secure production platform (storefront, authentication, dual-gateway payments, and logistics automation) built from the ground up to serve customers globally.</p>
+            <p><strong>What I Built:</strong> Built a full MERN stack storefront. Integrated Clerk for passwordless authentication, Razorpay for domestic (India) checkouts, and Stripe for international transactions. Automated order fulfillment via the Delhivery API, set up an inventory admin dashboard, and hardened the Express backend using Helmet, strict CSP headers, and rate-limiting. Implemented Meta Pixel and Conversions API (CAPI) for privacy-compliant ad attribution.</p>
+            <p><strong>Outcome:</strong> Successfully launched and currently serving active customers across India and Canada with automated payment routing and logistics label generation.</p>
+          </article>
+
+          <article>
+            <h3>02. Soundabode</h3>
+            <div class="project-meta">
+              <strong>URL:</strong> <a href="https://soundabode.com" target="_blank" rel="noopener noreferrer">soundabode.com</a> &middot; 
+              <strong>Stack:</strong> React, Three.js, GSAP, Lenis Scroll, Cloudflare Pages, Meta Pixel/CAPI
+            </div>
+            <p><strong>Problem:</strong> A local music academy wanted an immersive, interactive digital presence that matched the brand identity of DJing and music production, avoiding boilerplate templates.</p>
+            <p><strong>What I Built:</strong> Created a high-fidelity scrollytelling experience using React, Three.js, and GSAP ScrollTrigger for smooth, performance-optimized scroll animations. Handled server migration to Cloudflare Pages, resolved complex post-migration CSP errors, and executed local SEO/AEO/GEO optimization to secure local search authority.</p>
+            <p><strong>Outcome:</strong> Live site powering the academy's marketing, resulting in active local search leads and user engagement.</p>
+          </article>
+
+          <article>
+            <h3>03. Roadmaptic</h3>
+            <div class="project-meta">
+              <strong>URL:</strong> <a href="https://roadmaptic.qzz.io" target="_blank" rel="noopener noreferrer">roadmaptic.qzz.io</a> &middot; 
+              <strong>Stack:</strong> React, Vite, Node.js, OpenAI API, Tailwind CSS, EmailJS
+            </div>
+            <p><strong>Problem:</strong> Self-directed learners frequently struggle with "tutorial hell," consuming unstructured learning materials without a clear progression path.</p>
+            <p><strong>What I Built:</strong> Developed an AI product that parses a user's target role, current skills, and weekly commitment to generate a custom 12-week week-by-week learning roadmap. Curated a registry of high-quality free tutorials (FreeCodeCamp, YouTube, documentation) to inject instead of raw search links. Set up automated email delivery and an SEO-friendly blog/glossary directory.</p>
+            <p><strong>Outcome:</strong> Active production deployment generating custom structured curricula for learners without requiring sign-up barriers.</p>
+          </article>
+
+          <article>
+            <h3>04. Gyroscope Fruit Ninja</h3>
+            <div class="project-meta">
+              <strong>Repository:</strong> <a href="https://github.com/Justdevang/gyro-fruit-ninja" target="_blank" rel="noopener noreferrer">github.com/Justdevang/gyro-fruit-ninja</a> &middot; 
+              <strong>Stack:</strong> Three.js, Socket.IO, WebSockets, Node.js, Express, DeviceOrientation API
+            </div>
+            <p><strong>Problem:</strong> Exploring device interaction paradigms by creating a real-time web game controlled entirely by a smartphone's physical movement, with no touch or keyboard inputs.</p>
+            <p><strong>What I Built:</strong> Built a browser game using Three.js and Socket.IO. Streams phone gyroscope data (DeviceOrientation API) to a node backend in real-time, mapping quaternion sensor orientation to the slicing blade. Handled complex edge cases including sensor calibration drift and iOS Safari motion-permission requests.</p>
+            <p><strong>Outcome:</strong> Working cross-device real-time motion control proof-of-concept with ultra-low latency (&lt;20ms local streaming).</p>
+          </article>
+
+          <article>
+            <h3>05. Desktop Pet (macOS)</h3>
+            <div class="project-meta">
+              <strong>Repository:</strong> <a href="https://github.com/Justdevang/mac-desktop-pet" target="_blank" rel="noopener noreferrer">github.com/Justdevang/mac-desktop-pet</a> &middot; 
+              <strong>Stack:</strong> SwiftUI, AppKit, Blender, macOS SDK
+            </div>
+            <p><strong>Problem:</strong> Wanted to build a native macOS utility companion with real character personality that sits desktop-side, bypassing static app structures.</p>
+            <p><strong>What I Built:</strong> Created a SwiftUI and AppKit utility application. Modeled and rigged a low-poly character based on my own cat in Blender, exported it to native macOS layouts, and configured borderless, transparent overlay window layering to let the character walk on top of active system windows.</p>
+            <p><strong>Outcome:</strong> Fully functional desktop application featuring custom-rigged 3D animated companion.</p>
+          </article>
+        </section>
+
+        <section id="skills">
+          <h2>Skills &amp; Tech Stack</h2>
+          <ul>
+            <li><strong>Frontend:</strong> React &bull; Vite &bull; Three.js &bull; GSAP &bull; Lenis &bull; SwiftUI</li>
+            <li><strong>Backend:</strong> Node.js &bull; Express &bull; MongoDB &bull; Socket.IO</li>
+            <li><strong>Tools &amp; Infrastructure:</strong> Cloudflare Pages &bull; Razorpay &bull; Stripe &bull; Delhivery API &bull; Clerk Auth</li>
+            <li><strong>Design &amp; 3D:</strong> Blender &bull; Figma &bull; Motion Design</li>
+          </ul>
+        </section>
+
+        <section id="experience">
+          <h2>Experience</h2>
+          
+          <article>
+            <h3>Full-Stack Developer &mdash; Morivaná Daily</h3>
+            <div class="meta-info">Ongoing</div>
+            <p>Built the premium e-commerce platform end-to-end. Engineered storefront, Clerk authentication, dual-gateway payments (Razorpay/Stripe), automated Delhivery logistics API, admin console, and implemented high-security server configurations (Helmet, CSP headers, rate-limiting) and Meta Pixel/CAPI tracking.</p>
+          </article>
+
+          <article>
+            <h3>Full-Stack Developer &mdash; Soundabode</h3>
+            <div class="meta-info">Freelance</div>
+            <p>Designed and built a custom Three.js scrollytelling web experience with immersive, scroll-driven animations. Handled secure Cloudflare migration, resolved post-migration content security policy (CSP) issues, and executed a localized SEO/AEO/GEO strategy.</p>
+          </article>
+
+          <article>
+            <h3>Customer Service Associate L2 &mdash; Amazon</h3>
+            <div class="meta-info">Sep 25 - Apr 26</div>
+            <p>Operate within a high-scale, process-driven enterprise environment. Resolve critical escalations, manage queue workloads under strict SLAs, and coordinate cross-department workflows. This role funds my independent development runway while sharpening core operational habits: extreme ownership under pressure, structured communication, and high attention to detail.</p>
+          </article>
+        </section>
+
+        <section id="contact">
+          <h2>Contact &amp; Connect</h2>
+          <p>Open to full-time and freelance full-stack development roles. Whether you need a high-conversion e-commerce engine, an interactive 3D web experience, or are looking to hire a dedicated full-stack engineer based in Pune, let's start a conversation.</p>
+          <ul>
+            <li><strong>Email:</strong> <a href="mailto:devangdhakate22@gmail.com">devangdhakate22@gmail.com</a></li>
+            <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/devang-dhakate/" target="_blank" rel="noopener noreferrer">linkedin.com/in/devang-dhakate</a></li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/Justdevang" target="_blank" rel="noopener noreferrer">github.com/Justdevang</a></li>
+            <li><strong>Resume CV:</strong> <a href="/Devang_Dhakate_Resume.pdf" download="Devang_Dhakate_Resume.pdf">Download PDF Resume</a></li>
+          </ul>
+        </section>
+
+        <section id="faq">
+          <h2>Frequently Asked Questions</h2>
+          <dl>
+            <dt>Who is Devang Dhakate?</dt>
+            <dd>Devang Dhakate is a full-stack developer, product builder, and creative technologist based in Pune, India. He specializes in engineering production-ready MERN stack web applications, high-performance D2C e-commerce pipelines, and immersive 3D/creative frontend user experiences.</dd>
+            
+            <dt>What is Devang Dhakate's technical stack?</dt>
+            <dd>Devang's core stack includes React, Vite, Node.js, Express, and MongoDB (MERN). For creative and interactive experiences, he leverages Three.js, GSAP, Lenis, and Blender. For mobile and systems development, he works with SwiftUI, Socket.IO, Razorpay, Stripe, and Cloudflare Pages.</dd>
+            
+            <dt>What are Devang Dhakate's flagship projects?</dt>
+            <dd>His key projects include Morivaná Daily (a premium super-greens brand with automated logistics and payment routing), Soundabode (a custom Three.js scrollytelling experience), Gyroscope Fruit Ninja (a real-time device-controller game built using Socket.IO), and macOS Desktop Pet (a SwiftUI utility character modeled in Blender).</dd>
+            
+            <dt>Where is Devang Dhakate located and is he open to work?</dt>
+            <dd>Devang is based in Pune, Maharashtra, India. Having completed his studies and L2 operational operations at Amazon, he is actively open to full-time software engineering roles and freelance full-stack/creative contracts globally (remote or local).</dd>
+          </dl>
+        </section>
+      </main>
+      
+      <footer>
+        <p>&copy; 2026 Devang Dhakate. All Rights Reserved.</p>
+      </footer>
+    </div>
   </div>
   <script type="module" src="/src/main.jsx"></script>
   <!-- Lenis Smooth Scroll CDN -->
