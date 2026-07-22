@@ -45,7 +45,7 @@ const projects = [
     number: '04',
     name: 'Gyroscope Fruit Ninja',
     url: '#',
-    repoUrl: 'https://github.com/Justdevang/gyro-fruit-ninja',
+    repoUrl: 'https://github.com/Justdevang/Gyroscope-Controlled-Fruit-Ninja',
     image: '/images/gyro-ninja-hover-image.png',
     alt: 'Gyroscope-controlled Fruit Ninja browser game interaction model',
     problem: 'Exploring device interaction paradigms by creating a real-time web game controlled entirely by a smartphone\'s physical movement, with no touch or keyboard inputs.',
@@ -163,7 +163,7 @@ const SelectedWork = () => {
                   className="work-line divider"
                   style={{ transformOrigin: 'left' }}
                 />
-                
+
                 {/* Accordion Trigger Row */}
                 <button
                   onClick={() => toggleExpand(i)}
@@ -196,7 +196,7 @@ const SelectedWork = () => {
                 </button>
 
                 {/* Case Study Content Drawer */}
-                <div 
+                <div
                   className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[1400px] opacity-100 pb-12 pt-2' : 'max-h-0 opacity-0'}`}
                   style={{ borderBottom: isExpanded ? 'none' : 'none' }}
                 >
