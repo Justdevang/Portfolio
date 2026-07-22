@@ -10,7 +10,7 @@ const projects = [
     name: 'Morivaná Daily',
     url: 'https://morivanadaily.com',
     repoUrl: '', // Private D2C brand
-    image: '/images/morivana-hover-image.png',
+    image: '/images/morivana_work.jpeg',
     alt: 'Morivaná Daily premium organic super-greens e-commerce storefront landing page',
     problem: 'An e-commerce wellness brand needed a secure production platform (storefront, authentication, dual-gateway payments, and logistics automation) built from the ground up to serve customers globally.',
     whatIBuilt: 'Built a full MERN stack storefront. Integrated Clerk for passwordless authentication, Razorpay for domestic (India) checkouts, and Stripe for international transactions. Automated order fulfillment via the Delhivery API, set up an inventory admin dashboard, and hardened the Express backend using Helmet, strict CSP headers, and rate-limiting. Implemented Meta Pixel and Conversions API (CAPI) for privacy-compliant ad attribution.',
@@ -34,7 +34,7 @@ const projects = [
     name: 'Roadmaptic',
     url: 'https://roadmaptic.qzz.io',
     repoUrl: '', // Closed source
-    image: '/images/roadmaptic-hover-image.png',
+    image: '/images/roadmaptic_works.jpeg',
     alt: 'Roadmaptic AI curriculum and roadmap generator user dashboard',
     problem: 'Self-directed learners frequently struggle with "tutorial hell," consuming unstructured learning materials without a clear progression path.',
     whatIBuilt: 'Developed an AI product that parses a user\'s target role, current skills, and weekly commitment to generate a custom 12-week week-by-week learning roadmap. Curated a registry of high-quality free tutorials (FreeCodeCamp, YouTube, documentation) to inject instead of raw search links. Set up automated email delivery and an SEO-friendly blog/glossary directory.',
@@ -46,7 +46,7 @@ const projects = [
     name: 'Gyroscope Fruit Ninja',
     url: '#',
     repoUrl: 'https://github.com/Justdevang/Gyroscope-Controlled-Fruit-Ninja',
-    image: '/images/gyro-ninja-hover-image.png',
+    image: '/images/Gyro_fruitninja_work.jpeg',
     alt: 'Gyroscope-controlled Fruit Ninja browser game interaction model',
     problem: 'Exploring device interaction paradigms by creating a real-time web game controlled entirely by a smartphone\'s physical movement, with no touch or keyboard inputs.',
     whatIBuilt: 'Built a browser game using Three.js and Socket.IO. Streams phone gyroscope data (DeviceOrientation API) to a node backend in real-time, mapping quaternion sensor orientation to the slicing blade. Handled complex edge cases including sensor calibration drift and iOS Safari motion-permission requests.',
