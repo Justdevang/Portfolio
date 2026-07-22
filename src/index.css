@@ -278,6 +278,7 @@ img {
   z-index: 60;
   padding-top: var(--section-pad);
   padding-bottom: clamp(20px, 3vw, 40px);
+  background-color: var(--bg) !important;
 }
 
 #about {
