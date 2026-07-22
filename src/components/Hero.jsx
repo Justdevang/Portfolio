@@ -239,8 +239,8 @@ const Hero = ({ isReady }) => {
               View Work &rarr;
             </a>
             <a
-              href="/Devang_Dhakate_Resume.pdf"
-              download="Devang_Dhakate_Resume.pdf"
+              href="/DEVANG_PORTFOLIO.pdf"
+              download="DEVANG_PORTFOLIO.pdf"
               className="font-mono text-[11px] tracking-[0.15em] uppercase font-bold px-8 py-4 rounded-sm btn-secondary"
               data-cursor-hover
             >
