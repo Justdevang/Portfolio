@@ -68,6 +68,7 @@ const About = () => {
             >
               Full-Stack Architect ·<br />
               Creative Technologist ·<br />
+              3D &amp; Motion Designer ·<br />
               Based in Pune.
             </p>
           </div>
@@ -86,7 +87,7 @@ const About = () => {
                 color: '#ffffff',
               }}
             >
-              I'm Devang, a full-stack developer based in Pune, India. I build end-to-end: e-commerce platforms with real payments and logistics, interactive 3D web experiences, and the occasional native app. I care about the details that make a product actually work in production: security, performance, and the messy integrations most people skip. Currently moving toward full-time and freelance full-stack work.
+              I'm Devang, a full-stack developer based in Pune, India. I build end-to-end: e-commerce platforms with real payments and logistics, interactive 3D web experiences, and the occasional native app. Beyond code, I model and rig 3D characters in Blender and handle motion design in After Effects, skills I use to build custom assets and marketing visuals rather than relying on stock libraries. I care about the details that make a product actually work in production: security, performance, and the messy integrations most people skip. Currently moving toward full-time and freelance full-stack work.
             </p>
           </div>
         </div>

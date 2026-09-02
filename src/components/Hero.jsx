@@ -239,8 +239,8 @@ const Hero = ({ isReady }) => {
               View Work &rarr;
             </a>
             <a
-              href="/DEVANG_PORTFOLIO.pdf"
-              download="DEVANG_PORTFOLIO.pdf"
+              href="/RESUME.pdf"
+              download="RESUME.pdf"
               className="font-mono text-[11px] tracking-[0.15em] uppercase font-bold px-8 py-4 rounded-sm btn-secondary"
               data-cursor-hover
             >
@@ -279,6 +279,7 @@ const Hero = ({ isReady }) => {
             </div>
             <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">Web Design</span>
             <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">Web Development</span>
+            <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">3D &amp; Motion</span>
             <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[var(--text-muted)]">Based in Pune, India.</span>
           </div>
         </div>

@@ -8,7 +8,7 @@ const experiences = [
   {
     role: 'Full-Stack Developer',
     company: 'Morivaná Daily',
-    period: 'Ongoing',
+    period: 'Freelance',
     description:
       'Built the premium e-commerce platform end-to-end. Engineered storefront, Clerk authentication, dual-gateway payments (Razorpay/Stripe), automated Delhivery logistics API, admin console, and implemented high-security server configurations (Helmet, CSP headers, rate-limiting) and Meta Pixel/CAPI tracking.',
   },

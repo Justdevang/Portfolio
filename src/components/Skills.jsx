@@ -18,8 +18,12 @@ const skillGroups = [
     skills: ['Cloudflare Pages', 'Razorpay', 'Stripe', 'Delhivery API', 'Clerk Auth'],
   },
   {
-    category: 'Design & 3D',
-    skills: ['Blender', 'Figma', 'Motion Design'],
+    category: '3D & Character Design',
+    skills: ['Blender', 'Low-Poly Modeling', '3D Character Rigging'],
+  },
+  {
+    category: 'Motion & UI Design',
+    skills: ['After Effects', 'Motion Graphics', 'Figma', 'UI/UX Design'],
   },
 ];
 
@@ -84,7 +88,7 @@ const Skills = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-8 gap-y-12">
           {skillGroups.map((group, i) => (
             <div key={i} className="skills-reveal flex flex-col">
               <hr className="skills-line divider mb-6" style={{ transformOrigin: 'left' }} />

@@ -53,18 +53,6 @@ const projects = [
     stack: ['Three.js', 'Socket.IO', 'WebSockets', 'Node.js', 'Express', 'DeviceOrientation API'],
     outcome: 'Working cross-device real-time motion control proof-of-concept with ultra-low latency (<20ms local streaming).',
   },
-  {
-    number: '05',
-    name: 'Desktop Pet (macOS)',
-    url: '#',
-    repoUrl: 'https://github.com/Justdevang/mac-desktop-pet',
-    image: '/images/desktop-pet-hover-image.png',
-    alt: 'SwiftUI macOS desktop pet orange cat companion application',
-    problem: 'Wanted to build a native macOS utility companion with real character personality that sits directly on the user\'s desktop, bypassing static app structures.',
-    whatIBuilt: 'Created a SwiftUI and AppKit utility application. Modeled and rigged a low-poly character based on my own cat in Blender, exported it to native macOS layouts, and configured borderless, transparent overlay window layering to let the character walk on top of active system windows.',
-    stack: ['SwiftUI', 'AppKit', 'Blender', 'macOS SDK'],
-    outcome: 'Fully functional desktop application featuring custom-rigged 3D animated companion.',
-  },
 ];
 
 const SelectedWork = () => {

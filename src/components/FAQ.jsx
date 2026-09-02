@@ -15,11 +15,23 @@ const faqs = [
   },
   {
     question: 'What are Devang Dhakate\'s flagship projects?',
-    answer: 'His key projects include Morivaná Daily (a premium super-greens brand with automated logistics and payment routing), Soundabode (a custom Three.js scrollytelling experience), Gyroscope Fruit Ninja (a real-time device-controller game built using Socket.IO), and macOS Desktop Pet (a SwiftUI utility character modeled in Blender).',
+    answer: 'His key projects include Morivaná Daily (a premium super-greens brand with automated logistics and payment routing), Soundabode (a custom Three.js scrollytelling experience), and Gyroscope Fruit Ninja (a real-time device-controller game built using Socket.IO).',
   },
   {
     question: 'Where is Devang Dhakate located and is he open to work?',
     answer: 'Devang is based in Pune, Maharashtra, India. Having completed his studies and L2 operational operations at Amazon, he is actively open to full-time software engineering roles and freelance full-stack/creative contracts globally (remote or local).',
+  },
+  {
+    question: 'Does Devang Dhakate do 3D modeling and Blender work?',
+    answer: 'Yes. Devang models and rigs low-poly 3D characters in Blender and builds full Blender-to-web pipelines using GLB export and Draco compression to bring 3D assets into React Three.js experiences.',
+  },
+  {
+    question: 'Does Devang Dhakate offer motion design or video editing?',
+    answer: 'Devang handles motion design in After Effects for product showcases and marketing visuals, and has built custom video compositing pipelines in Python/OpenCV for AI-generated product footage, combining technical and creative tooling most developers don\'t cover.',
+  },
+  {
+    question: 'Is Devang Dhakate a UI/UX designer as well as a developer?',
+    answer: 'Yes, Devang designs interfaces in Figma before building them, giving him a full design-to-production workflow. This lets clients get a cohesive product from wireframe to a deployed, production-ready application without handing off between separate designers and developers.',
   },
 ];
 
