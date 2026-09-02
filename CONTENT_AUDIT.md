@@ -12,19 +12,19 @@
 ## Document Metadata & Head Tags — `index.html`
 *Data Source: Hardcoded directly in `index.html`*
 - Page Title: `"Devang Dhakate | Full-Stack Developer, 3D & Motion Designer"`
-- Meta Description: `"Pune-based full-stack developer and creative technologist. MERN stack development, React Three.js experiences, Blender 3D modeling & rigging, and After Effects motion design."`
+- Meta Description: `"Pune-based full-stack developer and creative technologist. MERN stack development, React Three.js experiences, Blender 3D modeling & rigging, Adobe Illustrator, and After Effects (AE) motion design."`
 - Canonical URL: `"https://devang-dhakate.onrender.com/"`
 - Meta Robots: `"index, follow"`
 - Google Site Verification: `"Dw20aEN6-jo2TAOKQbLEvMM1W8Yj_mH9W7OtUlZf9Vs"`
 - Open Graph Type: `"website"`
 - Open Graph URL: `"https://devang-dhakate.onrender.com/"`
 - Open Graph Title: `"Devang Dhakate | Full-Stack Developer, 3D & Motion Designer"`
-- Open Graph Description: `"Pune-based full-stack developer and creative technologist. MERN stack development, React Three.js experiences, Blender 3D modeling & rigging, and After Effects motion design."`
+- Open Graph Description: `"Pune-based full-stack developer and creative technologist. MERN stack development, React Three.js experiences, Blender 3D modeling & rigging, Adobe Illustrator, and After Effects (AE) motion design."`
 - Open Graph Image: `"https://devang-dhakate.onrender.com/images/Untitled%20(15).png"`
 - Twitter Card: `"summary_large_image"`
 - Twitter URL: `"https://devang-dhakate.onrender.com/"`
 - Twitter Title: `"Devang Dhakate | Full-Stack Developer, 3D & Motion Designer"`
-- Twitter Description: `"Pune-based full-stack developer and creative technologist. MERN stack development, React Three.js experiences, Blender 3D modeling & rigging, and After Effects motion design."`
+- Twitter Description: `"Pune-based full-stack developer and creative technologist. MERN stack development, React Three.js experiences, Blender 3D modeling & rigging, Adobe Illustrator, and After Effects (AE) motion design."`
 - Twitter Image: `"https://devang-dhakate.onrender.com/images/Untitled%20(15).png"`
 
 ---
@@ -39,12 +39,12 @@
   - Name: `"Devang Dhakate"`
   - Alternate Name: `"Devang"`
   - Job Title: `"Full-Stack Developer, Creative Technologist & 3D/Motion Designer"`
-  - Description: `"Devang Dhakate is a Pune-based Full-Stack Developer, Creative Technologist, and D2C product builder. He engineers dual-gateway payment systems and secure production applications, builds interactive Three.js web experiences, and models, rigs, and animates 3D characters in Blender extending into After Effects for motion graphics and product showcase videos."`
+  - Description: `"Devang Dhakate is a Pune-based Full-Stack Developer, Creative Technologist, and D2C product builder. He engineers dual-gateway payment systems and secure production applications, builds interactive Three.js web experiences, and models, rigs, and animates 3D characters in Blender extending into Adobe Illustrator and After Effects (AE) for motion graphics and product showcase videos."`
   - Address: `"Pune, Maharashtra, India"`
   - Organization (worksFor): `"Amazon"`, Job Title: `"Customer Service Associate L2"`
   - Brand: `"Morivaná Daily"` (`https://morivanadaily.com`)
   - Languages Known: `["English", "Hindi", "Marathi"]`
-  - Knowledge Topics: `["Full-Stack Development", "MERN Stack", "React", "Node.js", "Express", "MongoDB", "Three.js", "GSAP", "SwiftUI", "Blender 3D Modeling", "3D Character Rigging", "Low-Poly 3D Design", "After Effects", "Motion Graphics", "UI/UX Design", "Figma", "Razorpay", "Stripe", "Cloudflare Pages", "Delhivery API", "Socket.IO", "SEO Optimization", "Generative Engine Optimization (GEO)", "Answer Engine Optimization (AEO)"]`
+  - Knowledge Topics: `["Full-Stack Development", "MERN Stack", "React", "Node.js", "Express", "MongoDB", "Three.js", "GSAP", "SwiftUI", "Blender 3D Modeling", "3D Character Rigging", "Low-Poly 3D Design", "Adobe Illustrator", "After Effects (AE)", "Motion Graphics", "UI/UX Design", "Figma", "Razorpay", "Stripe", "Cloudflare Pages", "Delhivery API", "Socket.IO", "SEO Optimization", "Generative Engine Optimization (GEO)", "Answer Engine Optimization (AEO)"]`
 - FAQPage Schema:
   - Question 1: `"Who is Devang Dhakate?"`
   - Answer 1: `"Devang Dhakate is a full-stack developer, product builder, and creative technologist based in Pune, India. He specializes in engineering production-ready MERN stack web applications, high-performance D2C e-commerce pipelines, and immersive 3D/creative frontend user experiences."`
@@ -57,7 +57,7 @@
   - Question 5: `"Does Devang Dhakate do 3D modeling and Blender work?"`
   - Answer 5: `"Yes. Devang models and rigs low-poly 3D characters in Blender and builds full Blender-to-web pipelines using GLB export and Draco compression to bring 3D assets into React Three.js experiences."`
   - Question 6: `"Does Devang Dhakate offer motion design or video editing?"`
-  - Answer 6: `"Devang handles motion design in After Effects for product showcases and marketing visuals, and has built custom video compositing pipelines in Python/OpenCV for AI-generated product footage, combining technical and creative tooling most developers don't cover."`
+  - Answer 6: `"Devang handles motion design in Adobe After Effects (AE) and vector graphics in Adobe Illustrator for product showcases and marketing visuals, and has built custom video compositing pipelines in Python/OpenCV for AI-generated product footage, combining technical and creative tooling most developers don't cover."`
   - Question 7: `"Is Devang Dhakate a UI/UX designer as well as a developer?"`
   - Answer 7: `"Yes, Devang designs interfaces in Figma before building them, giving him a full design-to-production workflow. This lets clients get a cohesive product from wireframe to a deployed, production-ready application without handing off between separate designers and developers."`
 
@@ -106,7 +106,7 @@
   - Line 4: `"interactive web"`
   - Line 5: `"experiences."` *(styled with `.hero-italic`)*
 - Primary CTA: `"View Work →"` (Target: `#work`)
-- Secondary CTA: `"Download Resume ↓"` (Target: `/RESUME.pdf`, `download="RESUME.pdf"`)
+- Secondary CTA: `"Download Resume ↓"` (Target: `/Devang_Dhakate_Resume.pdf`, `download="Devang_Dhakate_Resume.pdf"`)
 - 3D Interactive Card Image Alt Text: `"Digital Experience"` (Source: `/images/Untitled (15).png`)
 - Status Indicator: `"Available for work"` (Accompanying live pulsing status dot)
 - Focus Area Subheadings / Badges:
@@ -131,7 +131,7 @@
   Based in Pune.
   ```
 - Body Paragraph:
-  `"I'm Devang, a full-stack developer based in Pune, India. I build end-to-end: e-commerce platforms with real payments and logistics, interactive 3D web experiences, and the occasional native app. Beyond code, I model and rig 3D characters in Blender and handle motion design in After Effects, skills I use to build custom assets and marketing visuals rather than relying on stock libraries. I care about the details that make a product actually work in production: security, performance, and the messy integrations most people skip. Currently moving toward full-time and freelance full-stack work."`
+  `"I'm Devang, a full-stack developer based in Pune, India. I build end-to-end: e-commerce platforms with real payments and logistics, interactive 3D web experiences, and the occasional native app. Beyond code, I model and rig 3D characters in Blender, craft vector artwork in Adobe Illustrator, and direct motion design in After Effects (AE), skills I use to build custom assets and marketing visuals rather than relying on stock libraries. I care about the details that make a product actually work in production: security, performance, and the messy integrations most people skip. Currently moving toward full-time and freelance full-stack work."`
 - Stat Cards (`stats` array hardcoded in component):
   - Stat 1:
     - Number: `"5+"`
@@ -299,9 +299,10 @@
     - `"Low-Poly Modeling"`
     - `"3D Character Rigging"`
   - Category 5: `"Motion & UI Design"`
-    - `"After Effects"`
-    - `"Motion Graphics"`
+    - `"Adobe Illustrator"`
+    - `"Adobe After Effects (AE)"`
     - `"Figma"`
+    - `"Motion Graphics"`
     - `"UI/UX Design"`
 
 ---
@@ -357,7 +358,7 @@
     - Value / Link Copy: `"github.com/Justdevang"` (Target: `https://github.com/Justdevang`)
   - Channel 4:
     - Label: `"RESUME:"`
-    - Value / Link Copy: `"Download CV/Resume ↓"` (Target: `/RESUME.pdf`, `download="RESUME.pdf"`)
+    - Value / Link Copy: `"Download CV/Resume ↓"` (Target: `/Devang_Dhakate_Resume.pdf`, `download="Devang_Dhakate_Resume.pdf"`)
 
 ### Contact Form Elements:
 - Field 1:
@@ -415,7 +416,7 @@
 ### FAQ Entry 06
 - Question: `"Does Devang Dhakate offer motion design or video editing?"`
 - Answer:
-  `"Devang handles motion design in After Effects for product showcases and marketing visuals, and has built custom video compositing pipelines in Python/OpenCV for AI-generated product footage, combining technical and creative tooling most developers don't cover."`
+  `"Devang handles motion design in Adobe After Effects (AE) and vector graphics in Adobe Illustrator for product showcases and marketing visuals, and has built custom video compositing pipelines in Python/OpenCV for AI-generated product footage, combining technical and creative tooling most developers don't cover."`
 
 ### FAQ Entry 07
 - Question: `"Is Devang Dhakate a UI/UX designer as well as a developer?"`
@@ -458,14 +459,14 @@ For accessibility, non-JavaScript clients, and search crawlers (Googlebot, Apple
 - Body Paragraph: `"Focus Areas: Web Design · Web Development · 3D & Motion · Creative Technology"`
 - CTAs / Links:
   - `"View Case Studies"` (`href="#work"`)
-  - `"Download Resume CV"` (`href="/RESUME.pdf"`)
+  - `"Download Resume CV"` (`href="/Devang_Dhakate_Resume.pdf"`)
 
 ## Semantic About Section — `index.html`
 *Data Source: Hardcoded directly in `index.html`*
 - Heading (h2): `"About Me"`
 - Meta Info: `"Full-Stack Architect · Creative Technologist · 3D & Motion Designer"`
 - Body Paragraph:
-  `"I'm Devang, a full-stack developer based in Pune, India. I build end-to-end: e-commerce platforms with real payments and logistics, interactive 3D web experiences, and the occasional native app. Beyond code, I model and rig 3D characters in Blender and handle motion design in After Effects, skills I use to build custom assets and marketing visuals rather than relying on stock libraries. I care about the details that make a product actually work in production: security, performance, and the messy integrations most people skip. Currently moving toward full-time and freelance full-stack work."`
+  `"I'm Devang, a full-stack developer based in Pune, India. I build end-to-end: e-commerce platforms with real payments and logistics, interactive 3D web experiences, and the occasional native app. Beyond code, I model and rig 3D characters in Blender, craft vector artwork in Adobe Illustrator, and direct motion design in After Effects (AE), skills I use to build custom assets and marketing visuals rather than relying on stock libraries. I care about the details that make a product actually work in production: security, performance, and the messy integrations most people skip. Currently moving toward full-time and freelance full-stack work."`
 - Key Metrics:
   - `"5+ Products Built"`
   - `"3+ Years Experience"`
@@ -515,7 +516,7 @@ For accessibility, non-JavaScript clients, and search crawlers (Googlebot, Apple
   - `"Backend: Node.js • Express • MongoDB • Socket.IO"`
   - `"Tools & Infrastructure: Cloudflare Pages • Razorpay • Stripe • Delhivery API • Clerk Auth"`
   - `"3D & Character Design: Blender • Low-Poly Modeling • 3D Character Rigging"`
-  - `"Motion & UI Design: After Effects • Motion Graphics • Figma • UI/UX Design"`
+  - `"Motion & UI Design: Adobe Illustrator • Adobe After Effects (AE) • Figma • Motion Graphics • UI/UX Design"`
 
 ## Semantic Experience Section — `index.html`
 *Data Source: Hardcoded directly in `index.html`*
@@ -548,7 +549,7 @@ For accessibility, non-JavaScript clients, and search crawlers (Googlebot, Apple
   - `"Email: devangdhakate22@gmail.com"` (`href="mailto:devangdhakate22@gmail.com"`)
   - `"LinkedIn: linkedin.com/in/devang-dhakate"` (`href="https://www.linkedin.com/in/devang-dhakate/"`)
   - `"GitHub: github.com/Justdevang"` (`href="https://github.com/Justdevang"`)
-  - `"Resume CV: Download PDF Resume"` (`href="/RESUME.pdf"`, `download="RESUME.pdf"`)
+  - `"Resume CV: Download PDF Resume"` (`href="/Devang_Dhakate_Resume.pdf"`, `download="Devang_Dhakate_Resume.pdf"`)
 
 ## Semantic FAQ Section — `index.html`
 *Data Source: Hardcoded directly in `index.html`*
@@ -570,7 +571,7 @@ For accessibility, non-JavaScript clients, and search crawlers (Googlebot, Apple
   - Answer (`<dd>`): `"Yes. Devang models and rigs low-poly 3D characters in Blender and builds full Blender-to-web pipelines using GLB export and Draco compression to bring 3D assets into React Three.js experiences."`
 - Q&A 6:
   - Question (`<dt>`): `"Does Devang Dhakate offer motion design or video editing?"`
-  - Answer (`<dd>`): `"Devang handles motion design in After Effects for product showcases and marketing visuals, and has built custom video compositing pipelines in Python/OpenCV for AI-generated product footage, combining technical and creative tooling most developers don't cover."`
+  - Answer (`<dd>`): `"Devang handles motion design in Adobe After Effects (AE) and vector graphics in Adobe Illustrator for product showcases and marketing visuals, and has built custom video compositing pipelines in Python/OpenCV for AI-generated product footage, combining technical and creative tooling most developers don't cover."`
 - Q&A 7:
   - Question (`<dt>`): `"Is Devang Dhakate a UI/UX designer as well as a developer?"`
   - Answer (`<dd>`): `"Yes, Devang designs interfaces in Figma before building them, giving him a full design-to-production workflow. This lets clients get a cohesive product from wireframe to a deployed, production-ready application without handing off between separate designers and developers."`

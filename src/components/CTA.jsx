@@ -95,7 +95,7 @@ const CTA = () => {
                   GITHUB: <a href="https://github.com/Justdevang" target="_blank" rel="noopener noreferrer" className="text-[var(--text)] underline underline-offset-4 hover:text-[var(--text-muted)] transition-colors duration-300">github.com/Justdevang</a>
                 </li>
                 <li>
-                  RESUME: <a href="/RESUME.pdf" download="RESUME.pdf" className="text-[var(--text)] font-bold underline underline-offset-4 hover:text-[var(--text-muted)] transition-colors duration-300">Download CV/Resume &darr;</a>
+                  RESUME: <a href="/Devang_Dhakate_Resume.pdf" download="Devang_Dhakate_Resume.pdf" className="text-[var(--text)] font-bold underline underline-offset-4 hover:text-[var(--text-muted)] transition-colors duration-300">Download CV/Resume &darr;</a>
                 </li>
               </ul>
             </div>

@@ -23,7 +23,7 @@ const skillGroups = [
   },
   {
     category: 'Motion & UI Design',
-    skills: ['After Effects', 'Motion Graphics', 'Figma', 'UI/UX Design'],
+    skills: ['Adobe Illustrator', 'Adobe After Effects (AE)', 'Figma', 'Motion Graphics', 'UI/UX Design'],
   },
 ];
 

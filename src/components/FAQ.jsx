@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     question: 'Does Devang Dhakate offer motion design or video editing?',
-    answer: 'Devang handles motion design in After Effects for product showcases and marketing visuals, and has built custom video compositing pipelines in Python/OpenCV for AI-generated product footage, combining technical and creative tooling most developers don\'t cover.',
+    answer: 'Devang handles motion design in Adobe After Effects (AE) and vector graphics in Adobe Illustrator for product showcases and marketing visuals, and has built custom video compositing pipelines in Python/OpenCV for AI-generated product footage, combining technical and creative tooling most developers don\'t cover.',
   },
   {
     question: 'Is Devang Dhakate a UI/UX designer as well as a developer?',
