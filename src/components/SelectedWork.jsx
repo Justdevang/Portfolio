@@ -7,6 +7,21 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     number: '01',
+    name: 'Tandem',
+    badge: 'VibeAthon 6.0 Certified',
+    url: 'https://tandem-frontend-wzka.onrender.com',
+    repoUrl: 'https://github.com/Justdevang/Tandem',
+    certificateUrl: '/images/certificates_Vibeathon6.0.jpg',
+    image: '/images/tandem_work.jpeg',
+    hoverImage: '/images/tandem-hover-image.png',
+    alt: 'Tandem Smart Restaurant Management SaaS real-time KDS and AI inventory forecasting dashboard',
+    problem: 'During peak restaurant rush hours, disconnected operational tools cause chaos between customer ordering, kitchen preparation, table turnover, and inventory tracking. Orders collide with prior dining sessions, kitchen queues overflow without customer visibility, and sudden stockouts result in rejected orders.',
+    whatIBuilt: 'Engineered an end-to-end real-time restaurant OS during the 3-day VibeAthon 6.0 hackathon. Built a closed-loop data pipeline where customer orders stream instantly via Socket.IO to a thermal-paper Kanban KDS ticket rail (New -> Firing -> Ready), auto-deduct 5-column inventory, isolate dining table sessions, and compute queue-aware prep ETAs. Integrated Google Gemini 2.0 AI for 48-hour ingredient demand forecasting and an in-menu conversational ordering assistant.',
+    stack: ['React 19', 'TypeScript', 'Node.js', 'Express', 'Socket.IO', 'MongoDB Atlas', 'Firebase Auth', 'Google Gemini AI', 'Tailwind CSS', 'Render'],
+    outcome: 'Successfully deployed production SaaS on Render with sub-50ms WebSocket latency across live orders. Awarded official VibeAthon 6.0 Certificate of Participation recognizing innovation, creativity, and technical excellence.',
+  },
+  {
+    number: '02',
     name: 'Morivaná Daily',
     url: 'https://morivanadaily.com',
     repoUrl: '', // Private D2C brand
@@ -18,7 +33,7 @@ const projects = [
     outcome: 'Successfully launched and currently serving active customers across India and Canada with automated payment routing and logistics label generation.',
   },
   {
-    number: '02',
+    number: '03',
     name: 'Soundabode',
     url: 'https://soundabode.com',
     repoUrl: '', // Private client project
@@ -30,7 +45,7 @@ const projects = [
     outcome: 'Live site powering the academy\'s marketing, resulting in active local search leads and user engagement.',
   },
   {
-    number: '03',
+    number: '04',
     name: 'Roadmaptic',
     url: 'https://roadmaptic.qzz.io',
     repoUrl: '', // Closed source
@@ -42,7 +57,7 @@ const projects = [
     outcome: 'Active production deployment generating custom structured curricula for learners without requiring sign-up barriers.',
   },
   {
-    number: '04',
+    number: '05',
     name: 'Gyroscope Fruit Ninja',
     url: '#',
     repoUrl: 'https://github.com/Justdevang/Gyroscope-Controlled-Fruit-Ninja',
@@ -170,10 +185,17 @@ const SelectedWork = () => {
                     {project.number}
                   </span>
 
-                  {/* Project Name */}
-                  <h3 className="font-display text-[clamp(24px,3.5vw,48px)] font-bold tracking-[-0.02em] leading-none flex-1">
-                    {project.name}
-                  </h3>
+                  {/* Project Name & Badge */}
+                  <div className="flex items-center gap-3 flex-1 flex-wrap">
+                    <h3 className="font-display text-[clamp(24px,3.5vw,48px)] font-bold tracking-[-0.02em] leading-none">
+                      {project.name}
+                    </h3>
+                    {project.badge && (
+                      <span className="font-mono text-[10px] tracking-[0.08em] uppercase px-2.5 py-1 rounded-full bg-black/[0.04] text-[var(--text-muted)] border border-black/10">
+                        {project.badge}
+                      </span>
+                    )}
+                  </div>
 
                   {/* Toggle Indicator */}
                   <span className="font-display text-[24px] shrink-0 opacity-40 transition-transform duration-500" style={{
@@ -242,6 +264,19 @@ const SelectedWork = () => {
                             GitHub Repo &rarr;
                           </a>
                         )}
+                        {project.certificateUrl && (
+                          <a
+                            href={project.certificateUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono text-[11px] tracking-[0.1em] uppercase font-bold px-5 py-3 rounded-sm btn-secondary flex items-center gap-1.5"
+                            data-cursor-hover
+                            title="View official VibeAthon 6.0 Certificate of Participation"
+                          >
+                            <span>View Certificate</span>
+                            <span className="text-[12px] leading-none">&#8599;</span>
+                          </a>
+                        )}
                       </div>
                     </div>
 
@@ -289,10 +324,10 @@ const SelectedWork = () => {
       </div>
 
       {/* Hover Preview Image */}
-      {hoveredIdx >= 0 && projects[hoveredIdx]?.image && (
+      {hoveredIdx >= 0 && (projects[hoveredIdx]?.hoverImage || projects[hoveredIdx]?.image) && (
         <img
           ref={imgRef}
-          src={projects[hoveredIdx].image}
+          src={projects[hoveredIdx].hoverImage || projects[hoveredIdx].image}
           alt=""
           className={`project-hover-img ${hoveredIdx >= 0 ? 'visible' : ''}`}
           style={{

@@ -6,6 +6,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const experiences = [
   {
+    role: 'Full-Stack Engineer (Hackathon)',
+    company: 'VibeAthon 6.0 · NXTGENSEC',
+    period: 'Jul 2026',
+    description:
+      'Engineered Tandem, an end-to-end real-time smart restaurant management OS during a 3-day sprint. Built a live KDS Kanban rail with Socket.IO, automated 5-column stock inventory sync, and integrated Google Gemini 2.0 AI for demand forecasting and conversational ordering. Awarded official Certificate of Participation for innovation, creativity, and technical excellence.',
+  },
+  {
     role: 'Full-Stack Developer',
     company: 'Morivaná Daily',
     period: 'Freelance',
@@ -25,6 +32,13 @@ const experiences = [
     period: 'Sep 25 - Apr 26',
     description:
       'Operate within a high-scale, process-driven enterprise environment. Resolve critical escalations, manage queue workloads under strict SLAs, and coordinate cross-department workflows. This role funds my independent development runway while sharpening core operational habits: extreme ownership under pressure, structured communication, and high attention to detail.',
+  },
+  {
+    role: 'Customer Service Representative',
+    company: 'Lifestyle International Pvt. Ltd.',
+    period: 'Oct 23 - Oct 24',
+    description:
+      'Contributed to a 30% overall profit increase by assisting in consistently exceeding monthly sales targets. Built and maintained long-term customer relationships to drive repeat sales, deliver customer-first brand experiences, and secure high positive feedback.',
   },
 ];
 

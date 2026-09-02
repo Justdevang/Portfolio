@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     question: 'What are Devang Dhakate\'s flagship projects?',
-    answer: 'His key projects include Morivaná Daily (a premium super-greens brand with automated logistics and payment routing), Soundabode (a custom Three.js scrollytelling experience), and Gyroscope Fruit Ninja (a real-time device-controller game built using Socket.IO).',
+    answer: 'His key projects include Tandem (a real-time smart restaurant OS with Gemini AI demand forecasting and live KDS built for VibeAthon 6.0), Morivaná Daily (a premium super-greens brand with automated logistics and payment routing), Soundabode (a custom Three.js scrollytelling experience), and Gyroscope Fruit Ninja (a real-time device-controller game built using Socket.IO).',
   },
   {
     question: 'Where is Devang Dhakate located and is he open to work?',
